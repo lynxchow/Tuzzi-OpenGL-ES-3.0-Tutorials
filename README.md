@@ -1,8 +1,8 @@
 # OpenGL-ES-3.0-tutorials
 ## 关于教程
-这是本人在学习OpenGL ES 3.0的过程中编写的一套教程。编写语言为Objective-C和C++。该教程的Demo目前只能运行在iOS平台，后续会推出Android版本。
+这是Pocoyo在学习OpenGL ES 3.0的过程中编写的一套教程。编写语言为Objective-C和C++。该教程的Demo目前只能运行在iOS平台，后续会推出Android版本。
 
-因为考虑到跨平台，OpenGL ES的核心代码由C++编写。其中GLApplication类，实现了OpenGL ES的着色器装载，编译和链接。每个Demo都有对应的一个子GLApplication类实现自己的业务逻辑。是不是很周到？哈哈~
+因为考虑到跨平台，OpenGL ES的核心代码由C++编写。其中GLApplication类，实现了OpenGL ES的着色器装载，编译和链接。每个Demo都有对应的一个GLApplication的子类实现自己的业务逻辑。是不是很周到？哈哈~
 
 目前只提供了教程的源码，准备得比较仓促，很多教程可能没有注释😂。感兴趣的同学，欢迎Star~~~后续会把注释完善，并且把博客搭起来。
 
@@ -13,7 +13,7 @@
 * 第四课：使用VAO，提高渲染效率——[Tutorial04_CubeVAO](https://github.com/PocoyoChow/OpenGL-ES-3.0-tutorials/tree/master/Tutorial04_CubeVAO)
 * 第五课：纹理贴图应用，给盒子贴纸——[Tutorial05_CubeWithTexture](https://github.com/PocoyoChow/OpenGL-ES-3.0-tutorials/tree/master/Tutorial05_CubeWithTexture)
 
-## 关于本人
+## 关于我
 **Pocoyo Chow**
 
 坐标：北京
