@@ -13,6 +13,7 @@
 * 第四课：使用VAO，提高渲染效率——[Tutorial04_CubeVAO](https://github.com/PocoyoChow/OpenGL-ES-3.0-tutorials/tree/master/Tutorial04_CubeVAO)
 * 第五课：纹理贴图应用，给盒子贴纸——[Tutorial05_CubeWithTexture](https://github.com/PocoyoChow/OpenGL-ES-3.0-tutorials/tree/master/Tutorial05_CubeWithTexture)
 * 第六课：环境光照——[Tutorial06_AmbientLight](https://github.com/PocoyoChow/OpenGL-ES-3.0-tutorials/tree/master/Tutorial06_AmbientLight)
+* 第七课：漫反射——[Tutorial07_DiffuseReflection](https://github.com/PocoyoChow/OpenGL-ES-3.0-tutorials/tree/master/Tutorial07_DiffuseReflection)
 
 ## 关于我
 **Pocoyo Chow**
