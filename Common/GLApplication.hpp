@@ -26,6 +26,7 @@ public:
     virtual ~GLApplication();
     virtual bool init() = 0;
     virtual void render(GLuint x, GLuint y, GLuint width, GLuint height);
+    virtual void onValueChanged(const char *key, float value);
     
 protected:
     GLuint programObject;

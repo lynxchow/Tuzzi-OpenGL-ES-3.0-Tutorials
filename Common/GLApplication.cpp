@@ -139,6 +139,11 @@ bool GLApplication::initShader(const char *vertFile, const char *fragFile)
     
 }
 
+void GLApplication::onValueChanged(const char *key, float value)
+{
+    
+}
+
 void GLApplication::render(GLuint x, GLuint y, GLuint width, GLuint height)
 {
 
