@@ -59,9 +59,9 @@ __attribute__ ( ( packed ) )
 extern "C" {
 #endif
 
-void utilLog(const char *formatStr, ...);
-const char *fileOpen(const char *fileName);
-unsigned char *loadTGA(const char *fileName, int *width, int *height);
+void Log(const char *formatStr, ...);
+const char *GetAbsolutePath(const char *file_name);
+unsigned char *LoadTGA(const char *file_name, int *width, int *height);
     
 #ifdef __cplusplus
 }

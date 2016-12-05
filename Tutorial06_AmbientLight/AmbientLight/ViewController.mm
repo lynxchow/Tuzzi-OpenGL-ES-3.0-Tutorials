@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#include "AmbientLightApplication.hpp"
+#include "AmbientLightApplication.h"
 
 @interface ViewController ()<GLKViewDelegate>
 {
@@ -37,7 +37,7 @@
     eaglLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], kEAGLDrawablePropertyRetainedBacking, kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat, nil];
     
     _application = new AmbientLightApplication();
-    _application->init();
+    _application->Init();
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -50,11 +50,11 @@
 }
 
 - (IBAction)ambientStrengthChanged:(UISlider *)slider {
-    _application->onValueChanged("ambient_strength", slider.value);
+    _application->OnValueChanged("ambient_strength", slider.value);
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
-    _application->render(rect.origin.x * 2, rect.origin.y * 2, rect.size.width * 2, rect.size.height * 2);
+    _application->Render(rect.origin.x * 2, rect.origin.y * 2, rect.size.width * 2, rect.size.height * 2);
 }
 
 @end

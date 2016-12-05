@@ -9,7 +9,7 @@
 #include "Util.h"
 #include <stdlib.h>
 
-void utilLog(const char *formatStr, ...)
+void Log(const char *formatStr, ...)
 {
     va_list params;
     char buf[BUFSIZ];
@@ -22,15 +22,15 @@ void utilLog(const char *formatStr, ...)
 #else
     printf("%s", buf);
 #endif
-    va_end (params);
+    va_end(params);
 }
 
-const char *fileOpen(const char *fileName)
+const char *GetAbsolutePath(const char *file_name)
 {
-    return getBundleFileName(fileName);
+    return getBundleFileName(file_name);
 }
 
-unsigned char *loadTGA(const char *fileName, int *width, int *height)
+unsigned char *LoadTGA(const char *file_name, int *width, int *height)
 {
     unsigned char *buffer;
     File *fp;
@@ -40,12 +40,12 @@ unsigned char *loadTGA(const char *fileName, int *width, int *height)
     long imageSize;
     
     // Open the file for reading
-    fp = fopen(fileName, "rb");
+    fp = fopen(file_name, "rb");
     
     if (fp == NULL)
     {
         // Log error as 'error in opening the input file from apk'
-        utilLog("loadTGA FAILED to load : { %s }\n", fileName);
+        Log("loadTGA FAILED to load : { %s }\n", file_name);
         return NULL;
     }
     
@@ -78,9 +78,6 @@ unsigned char *loadTGA(const char *fileName, int *width, int *height)
             return buffer;
         }
     }
-    
-    
-    
     
     return NULL;
 }

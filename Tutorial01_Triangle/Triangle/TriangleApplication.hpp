@@ -9,14 +9,14 @@
 #ifndef TriangleApplication_hpp
 #define TriangleApplication_hpp
 
-#include "GLApplication.hpp"
+#include "GLApplication.h"
 
 class TriangleApplication : public GLApplication
 {
 public:
     TriangleApplication();
-    virtual bool init();
-    virtual void render(GLuint x, GLuint y, GLuint width, GLuint height);
+    virtual bool Init();
+    virtual void Render(GLuint x, GLuint y, GLuint width, GLuint height);
 };
 
 #endif /* TriangleApplication_hpp */

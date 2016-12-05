@@ -24,8 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E10C94B31DF518FE006C23B2 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Shader.h; path = ../../Common/Shader.h; sourceTree = "<group>"; };
 		E1B96ECB1DE6C29A008BE8AE /* Triangle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Triangle.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E1B96ECF1DE6C29A008BE8AE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E1B96ED41DE6C29A008BE8AE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		E1B96ED51DE6C29A008BE8AE /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		E1B96ED81DE6C29A008BE8AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -43,7 +43,7 @@
 		E1B96EFD1DE83976008BE8AE /* FileWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileWrapper.h; path = ../../Common/FileWrapper.h; sourceTree = "<group>"; };
 		E1B96EFE1DE83976008BE8AE /* FileWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileWrapper.m; path = ../../Common/FileWrapper.m; sourceTree = "<group>"; };
 		E1B96EFF1DE83976008BE8AE /* GLApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GLApplication.cpp; path = ../../Common/GLApplication.cpp; sourceTree = "<group>"; };
-		E1B96F001DE83976008BE8AE /* GLApplication.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GLApplication.hpp; path = ../../Common/GLApplication.hpp; sourceTree = "<group>"; };
+		E1B96F001DE83976008BE8AE /* GLApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLApplication.h; path = ../../Common/GLApplication.h; sourceTree = "<group>"; };
 		E1B96F011DE83976008BE8AE /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../../Common/main.m; sourceTree = "<group>"; };
 		E1B96F021DE83976008BE8AE /* Util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Util.c; path = ../../Common/Util.c; sourceTree = "<group>"; };
 		E1B96F031DE83976008BE8AE /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Util.h; path = ../../Common/Util.h; sourceTree = "<group>"; };
@@ -93,17 +93,8 @@
 				E1B96EDA1DE6C29A008BE8AE /* Assets.xcassets */,
 				E1B96EDC1DE6C29A008BE8AE /* LaunchScreen.storyboard */,
 				E1B96EDF1DE6C29A008BE8AE /* Info.plist */,
-				E1B96ECE1DE6C29A008BE8AE /* Supporting Files */,
 			);
 			path = Triangle;
-			sourceTree = "<group>";
-		};
-		E1B96ECE1DE6C29A008BE8AE /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				E1B96ECF1DE6C29A008BE8AE /* main.m */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		E1B96EE51DE6C493008BE8AE /* Frameworks */ = {
@@ -118,12 +109,13 @@
 		E1B96F091DE84F3A008BE8AE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				E10C94B31DF518FE006C23B2 /* Shader.h */,
 				E1B96EFB1DE83976008BE8AE /* AppDelegate.h */,
 				E1B96EFC1DE83976008BE8AE /* AppDelegate.m */,
 				E1B96EFD1DE83976008BE8AE /* FileWrapper.h */,
 				E1B96EFE1DE83976008BE8AE /* FileWrapper.m */,
 				E1B96EFF1DE83976008BE8AE /* GLApplication.cpp */,
-				E1B96F001DE83976008BE8AE /* GLApplication.hpp */,
+				E1B96F001DE83976008BE8AE /* GLApplication.h */,
 				E1B96F011DE83976008BE8AE /* main.m */,
 				E1B96F021DE83976008BE8AE /* Util.c */,
 				E1B96F031DE83976008BE8AE /* Util.h */,

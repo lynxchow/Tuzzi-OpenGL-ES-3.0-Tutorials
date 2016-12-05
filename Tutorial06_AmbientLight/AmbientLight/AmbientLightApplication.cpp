@@ -6,7 +6,7 @@
 //  Copyright © 2016 pocoyo. All rights reserved.
 //
 
-#include "AmbientLightApplication.hpp"
+#include "AmbientLightApplication.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtx/transform2.hpp"
@@ -18,34 +18,34 @@
 #define VERTEX_POS_INDX       0
 #define VERTEX_COLOR_INDX     1
 
-AmbientLightApplication::AmbientLightApplication() : GLApplication("shader.vsh", "shader.fsh")
+AmbientLightApplication::AmbientLightApplication() : GLApplication(GetAbsolutePath("shader.vsh"), GetAbsolutePath("shader.fsh"))
 {
-    vaoId = 0;
-    vboIds[0] = 0;
-    vboIds[1] = 0;
+    vao_id_ = 0;
+    vbo_ids_[0] = 0;
+    vbo_ids_[1] = 0;
     
-    orientationX = 0;
-    orientationY = 0;
-    orientationZ = 0;
+    orientation_x_ = 0;
+    orientation_y_ = 0;
+    orientation_z_ = 0;
 }
 
-GLuint createTexture2D(const char *fileName)
+GLuint CreateTexture2D(const char *fileName)
 {
     // Texture object handle
-    GLuint textureId;
+    GLuint texture_id_;
     
     int width, height;
-    GLubyte *pixels = loadTGA(fileName, &width, &height);
+    GLubyte *pixels = LoadTGA(fileName, &width, &height);
     
     
     // Use tightly packed data
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     
     // Generate a texture object
-    glGenTextures(1, &textureId);
+    glGenTextures(1, &texture_id_);
     
     // Bind the texture object
-    glBindTexture(GL_TEXTURE_2D, textureId);
+    glBindTexture(GL_TEXTURE_2D, texture_id_);
     
     // Load the texture
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
@@ -54,14 +54,14 @@ GLuint createTexture2D(const char *fileName)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     
-    return textureId;
+    return texture_id_;
 }
 
-bool AmbientLightApplication::init()
+bool AmbientLightApplication::Init()
 {
-    textureId = createTexture2D(fileOpen("box.tga"));
-    m_mvp = glGetUniformLocation(programObject, "m_mvp");
-    ambientStrength = glGetUniformLocation(programObject, "m_ambient_strength");
+    texture_id_ = CreateTexture2D(GetAbsolutePath("box.tga"));
+    mvp_ = glGetUniformLocation(shader_.program_, "m_mvp");
+    ambient_strength_ = glGetUniformLocation(shader_.program_, "m_ambient_strength");
     
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     
@@ -179,48 +179,48 @@ bool AmbientLightApplication::init()
         glm::vec2(0, 1)
     };
     
-    glGenVertexArrays(1, &vaoId);
-    glBindVertexArray(vaoId);
+    glGenVertexArrays(1, &vao_id_);
+    glBindVertexArray(vao_id_);
     
-    glGenBuffers(2, vboIds);
-    glBindBuffer(GL_ARRAY_BUFFER, vboIds[0]);
+    glGenBuffers(2, vbo_ids_);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_ids_[0]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(pos), pos, GL_STATIC_DRAW);
-    glBindBuffer(GL_ARRAY_BUFFER, vboIds[1]);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_ids_[1]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(uv), uv, GL_STATIC_DRAW);
     
-    glBindBuffer(GL_ARRAY_BUFFER, vboIds[0]);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_ids_[0]);
     glEnableVertexAttribArray(VERTEX_POS_INDX);
     glVertexAttribPointer(VERTEX_POS_INDX, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, (const void *) 0);
     
-    glBindBuffer(GL_ARRAY_BUFFER, vboIds[1]);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_ids_[1]);
     glEnableVertexAttribArray(VERTEX_COLOR_INDX);
     glVertexAttribPointer(VERTEX_COLOR_INDX, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 2, (const void *) 0);
     
     glBindVertexArray(0);
-    glUseProgram(programObject);
-    glUniform1f(ambientStrength, 0.5);
+    shader_.Use();
+    glUniform1f(ambient_strength_, 0.5);
     
     return true;
 }
 
-void AmbientLightApplication::onValueChanged(const char *key, float value)
+void AmbientLightApplication::OnValueChanged(const char *key, float value)
 {
-    glUniform1f(ambientStrength, value);
+    glUniform1f(ambient_strength_, value);
 }
 
-void AmbientLightApplication::render(GLuint x, GLuint y, GLuint width, GLuint height)
+void AmbientLightApplication::Render(GLuint x, GLuint y, GLuint width, GLuint height)
 {
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     
     glViewport(0, 0, width, height);
-    orientationX += 3.0f;
-    orientationY += 4.0f;
-    orientationZ += 5.0f;
+    orientation_x_ += 3.0f;
+    orientation_y_ += 4.0f;
+    orientation_z_ += 5.0f;
     
     // Model
     glm::mat4 trans = glm::translate(glm::vec3(0,0,0));
     
-    glm::mat4 rotation = glm::eulerAngleYXZ(glm::radians(orientationX), glm::radians(orientationY), glm::radians(orientationZ));
+    glm::mat4 rotation = glm::eulerAngleYXZ(glm::radians(orientation_x_), glm::radians(orientation_y_), glm::radians(orientation_z_));
     glm::mat4 scale = glm::scale(glm::vec3(2.0f, 2.0f, 2.0f));
     
     glm::mat4 model = trans*scale*rotation;
@@ -233,19 +233,19 @@ void AmbientLightApplication::render(GLuint x, GLuint y, GLuint width, GLuint he
     
     proj = proj * view * model;
     
-    glUseProgram(programObject);
+    shader_.Use();
     
     // Enable depth test
     glEnable(GL_DEPTH_TEST);
     // Accept fragment if it closer to the camera than the former one
     glDepthFunc(GL_LESS);
     
-    glUniformMatrix4fv(m_mvp, 1, false, &proj[0][0]);
+    glUniformMatrix4fv(mvp_, 1, false, &proj[0][0]);
     
-    glBindVertexArray(vaoId);
+    glBindVertexArray(vao_id_);
     // Bind the texture
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, textureId);
+    glBindTexture(GL_TEXTURE_2D, texture_id_);
     
     glDrawArrays(GL_TRIANGLES, 0, 6 * 6);
     glBindVertexArray(0);

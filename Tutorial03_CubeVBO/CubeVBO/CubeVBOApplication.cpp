@@ -6,7 +6,7 @@
 //  Copyright © 2016 pocoyo. All rights reserved.
 //
 
-#include "CubeVBOApplication.hpp"
+#include "CubeVBOApplication.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtx/transform2.hpp"
@@ -18,20 +18,20 @@
 #define VERTEX_POS_INDX       0
 #define VERTEX_COLOR_INDX     1
 
-CubeVBOApplication::CubeVBOApplication() : GLApplication("shader.vsh", "shader.fsh")
+CubeVBOApplication::CubeVBOApplication() : GLApplication(GetAbsolutePath("shader.vsh"), GetAbsolutePath("shader.fsh"))
 {
-    vboIds[0] = 0;
-    vboIds[1] = 0;
+    vbo_ids_[0] = 0;
+    vbo_ids_[1] = 0;
     
-    orientationX = 0;
-    orientationY = 0;
-    orientationZ = 0;
+    orientation_x_ = 0;
+    orientation_y_ = 0;
+    orientation_z_ = 0;
 }
 
-bool CubeVBOApplication::init()
+bool CubeVBOApplication::Init()
 {
     
-    m_mvp = glGetUniformLocation(programObject, "m_mvp");
+    mvp_ = glGetUniformLocation(shader_.program_, "m_mvp");
     
     glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
     
@@ -149,29 +149,29 @@ bool CubeVBOApplication::init()
         glm::vec4(0, 0, 1, 1),
     };
     
-    glGenBuffers(2, vboIds);
+    glGenBuffers(2, vbo_ids_);
     
-    glBindBuffer(GL_ARRAY_BUFFER, vboIds[0]);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_ids_[0]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(pos), pos, GL_STATIC_DRAW);
-    glBindBuffer(GL_ARRAY_BUFFER, vboIds[1]);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_ids_[1]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(color), color, GL_STATIC_DRAW);
 
     return true;
 }
 
-void CubeVBOApplication::render(GLuint x, GLuint y, GLuint width, GLuint height)
+void CubeVBOApplication::Render(GLuint x, GLuint y, GLuint width, GLuint height)
 {
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     
     glViewport(0, 0, width, height);
-    orientationX += 3.0f;
-    orientationY += 4.0f;
-    orientationZ += 5.0f;
+    orientation_x_ += 3.0f;
+    orientation_y_ += 4.0f;
+    orientation_z_ += 5.0f;
     
     //model;
     glm::mat4 trans = glm::translate(glm::vec3(0,0,0));
     
-    glm::mat4 rotation = glm::eulerAngleYXZ(glm::radians(orientationX), glm::radians(orientationY), glm::radians(orientationZ));
+    glm::mat4 rotation = glm::eulerAngleYXZ(glm::radians(orientation_x_), glm::radians(orientation_y_), glm::radians(orientation_z_));
     glm::mat4 scale = glm::scale(glm::vec3(2.0f, 2.0f, 2.0f));
     
     glm::mat4 model = trans*scale*rotation;
@@ -182,23 +182,23 @@ void CubeVBOApplication::render(GLuint x, GLuint y, GLuint width, GLuint height)
     
     glm::mat4 proj = glm::perspective(glm::radians(60.0f), (float)width / height, 0.3f, 1000.0f);
     
-    proj = proj*view*model;
+    proj = proj * view * model;
     
-    glUseProgram(programObject);
+    shader_.Use();
     
     // Enable depth test
     glEnable(GL_DEPTH_TEST);
     // Accept fragment if it closer to the camera than the former one
     glDepthFunc(GL_LESS);
     
-    glUniformMatrix4fv(m_mvp, 1, false, &proj[0][0]);
-    glBindBuffer(GL_ARRAY_BUFFER, vboIds[0]);
+    glUniformMatrix4fv(mvp_, 1, false, &proj[0][0]);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_ids_[0]);
     glEnableVertexAttribArray(VERTEX_POS_INDX);
     glVertexAttribPointer (VERTEX_POS_INDX, 3,
                            GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3,
                            ( const void * ) 0);
     
-    glBindBuffer(GL_ARRAY_BUFFER, vboIds[1]);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_ids_[1]);
     glEnableVertexAttribArray(VERTEX_COLOR_INDX);
     glVertexAttribPointer(VERTEX_COLOR_INDX, 4, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 4, ( const void * ) 0);
     

@@ -8,22 +8,22 @@
 
 #include "TriangleApplication.hpp"
 
-TriangleApplication::TriangleApplication() : GLApplication("shader.vsh", "shader.fsh")
+TriangleApplication::TriangleApplication() : GLApplication(GetAbsolutePath("shader.vsh"), GetAbsolutePath("shader.fsh"))
 {
     
 }
 
-bool TriangleApplication::init()
+bool TriangleApplication::Init()
 {
     glEnable(GL_DEPTH_TEST);
     glClearColor(0.1, 0.2, 0.3, 1);
     return true;
 }
 
-void TriangleApplication::render(GLuint x, GLuint y, GLuint width, GLuint height)
+void TriangleApplication::Render(GLuint x, GLuint y, GLuint width, GLuint height)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);         // 清除颜色缓冲和深度缓冲
-    glUseProgram(programObject);                                // 使用shader
+    shader_.Use();                                              // 使用shader
     
     float vec[3][3] = {                                         // 三角形顶点
         { 0.0,  0.5,  0.5},
