@@ -45,4 +45,4 @@ Android Studio打开Android文件夹
 
 对VR/AR技术有浓厚的兴趣。如果你也是此技术的爱好者，或有什么疑问，欢迎加我的微信交流：Shamoo_zcl，备注：AR。
 
-![qrcode img](https://raw.githubusercontent.com/LittleLyn/Tuzzi-OpenGL-ES-3.0-Tutorials/tuzzi/qrcode.jpg)
+![qrcode img](https://raw.githubusercontent.com/LittleLyn/Tuzzi-OpenGL-ES-3.0-Tutorials/master/qrcode.jpg)
