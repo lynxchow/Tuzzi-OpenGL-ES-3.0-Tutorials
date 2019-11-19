@@ -1,1 +1,21 @@
+*.db
+*.cache
+*.iobj
+*.ipdb
+*.ilk
+*.pdb
+*.tmp
+*.iml
+*.pri
+local.properties
+*.exe
+build
+.vs
+.gradle
+.idea
+Debug
+Release
+export out
+export out.meta
 .DS_Store
+xcuserdata
