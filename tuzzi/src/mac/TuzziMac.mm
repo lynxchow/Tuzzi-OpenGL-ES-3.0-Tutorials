@@ -59,6 +59,7 @@
 - (void)dealloc
 {
     tuzzi::Tuzzi::instance()->destroy();
+    [super dealloc];
 }
 
 @end
