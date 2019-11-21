@@ -22,11 +22,16 @@
 #include "Tuzzi.h"
 #include "string/String.h"
 #include "Tutorial_01/DemoApplication.h"
+#include "android/TuzziAndroid.h"
 
 using namespace tuzzi;
 
 static JNIEnv* g_env;
 static jobject g_jni_obj;
+
+static ANativeWindow *window = nullptr;
+static TuzziAndroid *s_tuzzi = nullptr;
+
 static bool g_paused = false;
 
 static int call_activity_method_int(const char* name, const char* sig, ...);
@@ -43,10 +48,15 @@ Java_com_tuzzi_lib_Tuzzi_create(JNIEnv *env, jobject obj, jobject surface, jint 
     g_env = env;
     g_jni_obj = obj;
 
-    Tuzzi::instance()->init();
 
-    SharedPtr<Application> application = MakeShared<DemoApplication>();
-    Tuzzi::instance()->loadApplication(application);
+    if (surface != nullptr) {
+        window = ANativeWindow_fromSurface(env, surface);
+        s_tuzzi = new TuzziAndroid(window);
+
+        SharedPtr<Application> app = MakeShared<DemoApplication>();
+        s_tuzzi->loadApplication(app);
+    }
+
     g_paused = false;
 }
 
@@ -54,7 +64,19 @@ void Java_com_tuzzi_lib_Tuzzi_destroy(JNIEnv *env, jobject obj) {
     g_env = env;
     g_jni_obj = obj;
 
-    Tuzzi::instance()->destroy();
+    if (s_tuzzi)
+    {
+        s_tuzzi->destroy();
+        delete s_tuzzi;
+        s_tuzzi = nullptr;
+    }
+
+    if (window)
+    {
+
+        ANativeWindow_release(window);
+        window = nullptr;
+    }
 }
 
 void
@@ -63,21 +85,16 @@ Java_com_tuzzi_lib_Tuzzi_resize(JNIEnv *env, jobject obj, jobject surface, jint 
     g_jni_obj = obj;
 }
 
-void Java_com_tuzzi_lib_Tuzzi_surfaceDestroy(JNIEnv *env, jobject obj) {
-    g_env = env;
-    g_jni_obj = obj;
-
-    g_paused = true;
-}
-
 void Java_com_tuzzi_lib_Tuzzi_pause(JNIEnv *env, jobject obj) {
     g_env = env;
     g_jni_obj = obj;
+    s_tuzzi->pause();
 }
 
 void Java_com_tuzzi_lib_Tuzzi_resume(JNIEnv *env, jobject obj) {
     g_env = env;
     g_jni_obj = obj;
+    s_tuzzi->resume();
 }
 
 void Java_com_tuzzi_lib_Tuzzi_draw(JNIEnv *env, jobject obj) {
@@ -85,7 +102,7 @@ void Java_com_tuzzi_lib_Tuzzi_draw(JNIEnv *env, jobject obj) {
     g_jni_obj = obj;
 
     if (!g_paused) {
-        Tuzzi::instance()->update();
+        s_tuzzi->drawFrame();
     }
 }
 

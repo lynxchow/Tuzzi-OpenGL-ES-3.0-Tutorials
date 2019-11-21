@@ -46,10 +46,6 @@ public class TuzziView extends SurfaceView implements SurfaceHolder.Callback {
                         }
                     }
                 }
-
-                if (mEngineCreated) {
-                    mTuzzi.destroy();
-                }
             }
         });
         mRenderThread.start();
@@ -61,13 +57,11 @@ public class TuzziView extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        Log.e(TAG, "surfaceCreated");
+
     }
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        Log.e(TAG, "surfaceChanged");
-
         postEvent(new Runnable() {
             @Override
             public void run() {
@@ -87,13 +81,14 @@ public class TuzziView extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        Log.e(TAG, "surfaceDestroyed");
-
         postEvent(new Runnable() {
             @Override
             public void run() {
+                mStopRenderThread = true;
                 if (mEngineCreated) {
-                    mTuzzi.surfaceDestroy();
+                    mTuzzi.destroy();
+                    mPaused = true;
+                    mEngineCreated = false;
                 }
             }
         });
@@ -106,7 +101,6 @@ public class TuzziView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void onPause() {
-        Log.e(TAG, "onPause");
         this.postEvent(new Runnable() {
             @Override
             public void run() {
@@ -119,7 +113,6 @@ public class TuzziView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void onResume() {
-        Log.e(TAG, "onResume");
         this.postEvent(new Runnable() {
             @Override
             public void run() {
@@ -132,8 +125,7 @@ public class TuzziView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void onDestroy() {
-        Log.e(TAG, "onDestroy");
-        mStopRenderThread = true;
+
     }
 
 }

@@ -8,10 +8,12 @@
 
 #import "TuzziMac.h"
 #include "Tuzzi.h"
+#include "gl/gl.h"
 
 @interface TuzziMac()
 {
     NSView *m_view;
+    NSOpenGLContext *m_context;
 }
 @end
 
@@ -22,7 +24,19 @@
     self = [super init];
     if (self)
     {
+        const uint32_t attrs[] =
+        {
+            NSOpenGLPFAOpenGLProfile, NSOpenGLProfileVersion4_1Core,
+            NSOpenGLPFADoubleBuffer,
+            NSOpenGLPFAColorSize, 24,
+            NSOpenGLPFADepthSize, 24,
+            0
+        };
+        
         m_view = [[NSView alloc] initWithFrame:frameRect];
+        m_context = [[NSOpenGLContext alloc] initWithFormat:[[NSOpenGLPixelFormat alloc] initWithAttributes:attrs] shareContext:nil];
+        [m_context setView:m_view];
+        [m_context makeCurrentContext];
         
         tuzzi::Tuzzi::instance()->init();
     }
@@ -37,7 +51,11 @@
 
 - (void)drawFrame
 {
+    [m_context makeCurrentContext];
+    glClearColor(0.0, 0.5, 0.5, 1.0);
+    glClear(GL_COLOR_BUFFER_BIT);
     tuzzi::Tuzzi::instance()->update();
+    [m_context flushBuffer];
 }
 
 - (BOOL)loadApplication:(SharedPtr<tuzzi::Application>)application
@@ -59,6 +77,7 @@
 - (void)dealloc
 {
     tuzzi::Tuzzi::instance()->destroy();
+    [m_context release];
     [super dealloc];
 }
 

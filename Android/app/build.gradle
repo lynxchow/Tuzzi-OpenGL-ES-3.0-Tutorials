@@ -12,11 +12,12 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {
-                cppFlags "-std=c++11"
-                arguments '-DANDROID_PLATFORM=android-21', '-DANDROID_TOOLCHAIN=clang', '-DANDROID_STL=c++_shared', '-DTarget=Android'
+                cppFlags ""
+                arguments '-DANDROID_PLATFORM=android-21', '-DANDROID_TOOLCHAIN=clang', "-DANDROID_STL=c++_shared", '-DTarget=Android'
             }
         }
     }
+
     buildTypes {
         release {
             minifyEnabled false

@@ -64,8 +64,6 @@ public class Tuzzi {
 
     public native void draw();
 
-    public native void surfaceDestroy();
-
     public native void pause();
 
     public native void resume();

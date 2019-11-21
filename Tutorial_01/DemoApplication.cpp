@@ -8,6 +8,7 @@
 
 #include "DemoApplication.h"
 #include "Tuzzi.h"
+#include "gl/gl.h"
 
 NAMESPACE_TUZZI_ENGINE_USING
 
@@ -29,6 +30,9 @@ void DemoApplication::onInit()
 void DemoApplication::onUpdate()
 {
     TZ_LOGD("DemoApplication", "onUpdate");
+    
+    glClearColor(0.0, 0.5, 0.5, 1.0);
+    glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void DemoApplication::onDestroy()

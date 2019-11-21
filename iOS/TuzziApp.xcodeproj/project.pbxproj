@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C411084238536D700279AC3 /* DemoApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C411082238536D600279AC3 /* DemoApplication.cpp */; };
 		3CA17A54237AC0A60046975B /* libTuzzi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CA17A53237AC0A60046975B /* libTuzzi.a */; };
-		3CA17A57237AD1D00046975B /* DemoApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CA17A55237AD1D00046975B /* DemoApplication.cpp */; };
 		3CDAC241238159B60004F5F2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDAC23F238159B60004F5F2 /* AppDelegate.m */; };
 		3CDAC244238159DC0004F5F2 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3CDAC242238159DC0004F5F2 /* ViewController.mm */; };
 		3CDAC24923815A050004F5F2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDAC24623815A040004F5F2 /* main.m */; };
@@ -17,10 +17,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C411082238536D600279AC3 /* DemoApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DemoApplication.cpp; path = ../Tutorial_01/DemoApplication.cpp; sourceTree = "<group>"; };
+		3C411083238536D600279AC3 /* DemoApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DemoApplication.h; path = ../Tutorial_01/DemoApplication.h; sourceTree = "<group>"; };
 		3CA17A4F237AB5EB0046975B /* libTuzzi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libTuzzi.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CA17A53237AC0A60046975B /* libTuzzi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libTuzzi.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		3CA17A55237AD1D00046975B /* DemoApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DemoApplication.cpp; path = ../../Tutorial_01/DemoApplication.cpp; sourceTree = "<group>"; };
-		3CA17A56237AD1D00046975B /* DemoApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DemoApplication.h; path = ../../Tutorial_01/DemoApplication.h; sourceTree = "<group>"; };
 		3CDAC23F238159B60004F5F2 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		3CDAC240238159B60004F5F2 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		3CDAC242238159DC0004F5F2 /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = SOURCE_ROOT; };
@@ -44,6 +44,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C411081238536B200279AC3 /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				3C411082238536D600279AC3 /* DemoApplication.cpp */,
+				3C411083238536D600279AC3 /* DemoApplication.h */,
+				3CDAC240238159B60004F5F2 /* AppDelegate.h */,
+				3CDAC23F238159B60004F5F2 /* AppDelegate.m */,
+				3CDAC243238159DC0004F5F2 /* ViewController.h */,
+				3CDAC242238159DC0004F5F2 /* ViewController.mm */,
+				3CDAC24B23815A180004F5F2 /* Info.plist */,
+				3CDAC24E23816EE90004F5F2 /* LaunchScreen.storyboard */,
+				3CDAC24723815A050004F5F2 /* Assets.xcassets */,
+				3CDAC24623815A040004F5F2 /* main.m */,
+			);
+			name = Tutorial;
+			sourceTree = "<group>";
+		};
 		3CA17A4E237AB5EB0046975B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -56,7 +73,7 @@
 		D4BB41342378436400EC82BA = {
 			isa = PBXGroup;
 			children = (
-				D4BB413F2378436400EC82BA /* Tutorial */,
+				3C411081238536B200279AC3 /* Tutorial */,
 				D4BB413E2378436400EC82BA /* Products */,
 				3CA17A4E237AB5EB0046975B /* Frameworks */,
 			);
@@ -68,23 +85,6 @@
 				D4BB413D2378436400EC82BA /* TuzziApp.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		D4BB413F2378436400EC82BA /* Tutorial */ = {
-			isa = PBXGroup;
-			children = (
-				3CDAC240238159B60004F5F2 /* AppDelegate.h */,
-				3CDAC23F238159B60004F5F2 /* AppDelegate.m */,
-				3CDAC243238159DC0004F5F2 /* ViewController.h */,
-				3CDAC242238159DC0004F5F2 /* ViewController.mm */,
-				3CA17A55237AD1D00046975B /* DemoApplication.cpp */,
-				3CA17A56237AD1D00046975B /* DemoApplication.h */,
-				3CDAC24B23815A180004F5F2 /* Info.plist */,
-				3CDAC24E23816EE90004F5F2 /* LaunchScreen.storyboard */,
-				3CDAC24723815A050004F5F2 /* Assets.xcassets */,
-				3CDAC24623815A040004F5F2 /* main.m */,
-			);
-			path = Tutorial;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,9 +157,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CDAC244238159DC0004F5F2 /* ViewController.mm in Sources */,
+				3C411084238536D700279AC3 /* DemoApplication.cpp in Sources */,
 				3CDAC241238159B60004F5F2 /* AppDelegate.m in Sources */,
 				3CDAC24923815A050004F5F2 /* main.m in Sources */,
-				3CA17A57237AD1D00046975B /* DemoApplication.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,13 +300,14 @@
 					"${PROJECT_DIR}/../tuzzi/src/ios",
 				);
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tuzzi.Tutorial-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -321,13 +322,14 @@
 					"${PROJECT_DIR}/../tuzzi/src/ios",
 				);
 				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tuzzi.Tutorial-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

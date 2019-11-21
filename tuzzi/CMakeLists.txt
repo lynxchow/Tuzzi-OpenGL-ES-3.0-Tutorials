@@ -16,13 +16,16 @@ file(GLOB TUZZI_LIB_SRCS
      ${TUZZI_LIB_DIR}/*.h
      ${TUZZI_LIB_DIR}/*.cpp
      ${TUZZI_LIB_DIR}/string/*.h
-     ${TUZZI_LIB_DIR}/string/*.cpp
+     ${TUZZI_LIB_DIR}/string/*.h
+     ${TUZZI_LIB_DIR}/gl/*.h
+     ${TUZZI_LIB_DIR}/gl/*.cpp
      )
 
-source_group(TREE ${TUZZI_LIB_DIR} FILES ${TUZZI_LIB_SRCS})
+source_group(TREE ${TUZZI_LIB_DIR}/.. FILES ${TUZZI_LIB_SRCS})
 add_library(Tuzzi ${TUZZI_LIB_SRCS})
 
 if (${Target} MATCHES "macOS")
+     set(CMAKE_OSX_DEPLOYMENT_TARGET "10.10")
      file(GLOB TUZZI_LIB_MAC_SRCS
           ${TUZZI_LIB_DIR}/mac/*.h
           ${TUZZI_LIB_DIR}/mac/*.cpp
@@ -30,7 +33,7 @@ if (${Target} MATCHES "macOS")
           ${TUZZI_LIB_DIR}/mac/*.mm
      )
 
-     source_group(TREE ${TUZZI_LIB_DIR} FILES ${TUZZI_LIB_MAC_SRCS})
+     source_group(TREE ${TUZZI_LIB_DIR}/.. FILES ${TUZZI_LIB_MAC_SRCS})
      target_sources(Tuzzi PRIVATE ${TUZZI_LIB_MAC_SRCS})
 
 elseif (${Target} MATCHES "iOS")
@@ -40,7 +43,7 @@ elseif (${Target} MATCHES "iOS")
         ERROR_QUIET
         OUTPUT_STRIP_TRAILING_WHITESPACE)
     message(STATUS "found ios sdk: ${CMAKE_OSX_SYSROOT}")
-    set(CMAKE_OSX_DEPLOYMENT_TARGET "")
+    set(CMAKE_OSX_DEPLOYMENT_TARGET "8.0")
     set(CMAKE_OSX_ARCHITECTURES arm64)
 
     file(GLOB TUZZI_LIB_IOS_SRCS
@@ -50,11 +53,18 @@ elseif (${Target} MATCHES "iOS")
           ${TUZZI_LIB_DIR}/ios/*.mm
      )
 
-     source_group(TREE ${TUZZI_LIB_DIR} FILES ${TUZZI_LIB_IOS_SRCS})
+     source_group(TREE ${TUZZI_LIB_DIR}/.. FILES ${TUZZI_LIB_IOS_SRCS})
      target_sources(Tuzzi PRIVATE ${TUZZI_LIB_IOS_SRCS})
 
 elseif (${Target} MATCHES "Android")
 
+    file(GLOB TUZZI_LIB_ANDROID_SRCS
+          ${TUZZI_LIB_DIR}/android/*.h
+          ${TUZZI_LIB_DIR}/android/*.cpp
+     )
+
+    source_group(TREE ${TUZZI_LIB_DIR}/.. FILES ${TUZZI_LIB_ANDROID_SRCS})
+    target_sources(Tuzzi PRIVATE ${TUZZI_LIB_ANDROID_SRCS})
     add_library(TuzziApp SHARED
             ${CMAKE_SOURCE_DIR}/../Tutorial_01/DemoApplication.h
             ${CMAKE_SOURCE_DIR}/../Tutorial_01/DemoApplication.cpp

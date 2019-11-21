@@ -21,10 +21,10 @@ public:
     static void filterLogLevel(LogLevel level);
 };
 
-#define TZ_LOGI(TAG, FMT, ...) Debug::log(LOG_LEVEL_INFO, "(%s:%d)[INFO][%s]: " FMT "\n", __FILE__, __LINE__, TAG, ##__VA_ARGS__)
-#define TZ_LOGD(TAG, FMT, ...) Debug::log(LOG_LEVEL_DEBUG, "(%s:%d)[DEBUG][%s]: " FMT "\n", __FILE__, __LINE__, TAG, ##__VA_ARGS__)
-#define TZ_LOGW(TAG, FMT, ...) Debug::log(LOG_LEVEL_WARN, "(%s:%d)[WARN][%s]: " FMT "\n", __FILE__, __LINE__, TAG, ##__VA_ARGS__)
-#define TZ_LOGE(TAG, FMT, ...) Debug::log(LOG_LEVEL_ERROR, "(%s:%d)[ERROR][%s]: " FMT "\n", __FILE__, __LINE__, TAG, ##__VA_ARGS__)
+#define TZ_LOGI(TAG, FMT, ...) tuzzi::Debug::log(tuzzi::LOG_LEVEL_INFO, "(%s:%d)[INFO][%s]: " FMT "\n", __FILE__, __LINE__, TAG, ##__VA_ARGS__)
+#define TZ_LOGD(TAG, FMT, ...) tuzzi::Debug::log(tuzzi::LOG_LEVEL_DEBUG, "(%s:%d)[DEBUG][%s]: " FMT "\n", __FILE__, __LINE__, TAG, ##__VA_ARGS__)
+#define TZ_LOGW(TAG, FMT, ...) tuzzi::Debug::log(tuzzi::LOG_LEVEL_WARN, "(%s:%d)[WARN][%s]: " FMT "\n", __FILE__, __LINE__, TAG, ##__VA_ARGS__)
+#define TZ_LOGE(TAG, FMT, ...) tuzzi::Debug::log(tuzzi::LOG_LEVEL_ERROR, "(%s:%d)[ERROR][%s]: " FMT "\n", __FILE__, __LINE__, TAG, ##__VA_ARGS__)
 
 NAMESPACE_TUZZI_ENGINE_END
 
