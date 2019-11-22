@@ -68,6 +68,8 @@ public class Tuzzi {
 
     public native void resume();
 
+    public native void onSurfaceDestroy();
+
     public native void destroy();
 
 }

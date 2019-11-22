@@ -10,9 +10,9 @@
 #include "android/TuzziAndroid.h"
 
 TuzziAndroid::TuzziAndroid(ANativeWindow *window)
-    : _display(nullptr), _surface(nullptr), _context(nullptr)
+    : m_display(nullptr), m_surface(nullptr), m_context(nullptr)
 {
-    _window = window;
+    m_window = window;
     initialize();
     tuzzi::Tuzzi::instance()->init();
 }
@@ -83,8 +83,13 @@ bool TuzziAndroid::initialize()
         destroy();
         return false;
     }
+
+    const EGLint context_attribs[] = {
+            EGL_CONTEXT_CLIENT_VERSION, 3,
+            EGL_NONE
+    };
     
-    if (!(context = eglCreateContext(display, config, 0, 0))) {
+    if (!(context = eglCreateContext(display, config, nullptr, context_attribs))) {
         TZ_LOGE("TuzziAndroid", "eglCreateContext() returned error %d", eglGetError());
         destroy();
         return false;
@@ -103,32 +108,35 @@ bool TuzziAndroid::initialize()
         return false;
     }
 
-    _display = display;
-    _surface = surface;
-    _context = context;
+    m_display = display;
+    m_surface = surface;
+    m_context = context;
 
     return true;
 }
 
-void TuzziAndroid::destroy() {
-    tuzzi::Tuzzi::instance()->destroy();
-    eglMakeCurrent(_display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
-    eglDestroyContext(_display, _context);
-    eglDestroySurface(_display, _surface);
-    eglTerminate(_display);
-    
-    _display = EGL_NO_DISPLAY;
-    _surface = EGL_NO_SURFACE;
-    _context = EGL_NO_CONTEXT;
+void TuzziAndroid::onSurfaceDestory()
+{
+    eglMakeCurrent(m_display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+    eglDestroyContext(m_display, m_context);
+    eglDestroySurface(m_display, m_surface);
+    eglTerminate(m_display);
 
-    return;
+    m_display = EGL_NO_DISPLAY;
+    m_surface = EGL_NO_SURFACE;
+    m_context = EGL_NO_CONTEXT;
+}
+
+void TuzziAndroid::destroy()
+{
+    tuzzi::Tuzzi::instance()->destroy();
 }
 
 void TuzziAndroid::drawFrame()
 {
     tuzzi::Tuzzi::instance()->update();
 
-    if (!eglSwapBuffers(_display, _surface)) {
+    if (!eglSwapBuffers(m_display, m_surface)) {
         TZ_LOGE("TuzziAndroid", "eglSwapBuffers() returned error %d", eglGetError());
     }
 }

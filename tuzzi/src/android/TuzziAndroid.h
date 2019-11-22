@@ -22,13 +22,15 @@ public:
 
     void destroy();
 
+    void onSurfaceDestory();
+
 private:
 
-    ANativeWindow* _window;
+    ANativeWindow *m_window;
 
-    EGLDisplay _display;
-    EGLSurface _surface;
-    EGLContext _context;
+    EGLDisplay m_display;
+    EGLSurface m_surface;
+    EGLContext m_context;
 
     bool initialize();
 

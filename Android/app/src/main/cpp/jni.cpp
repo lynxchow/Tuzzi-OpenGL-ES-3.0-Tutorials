@@ -60,6 +60,20 @@ Java_com_tuzzi_lib_Tuzzi_create(JNIEnv *env, jobject obj, jobject surface, jint 
     g_paused = false;
 }
 
+void Java_com_tuzzi_lib_Tuzzi_onSurfaceDestroy(JNIEnv *env, jobject obj) {
+    g_env = env;
+    g_jni_obj = obj;
+    if (s_tuzzi)
+    {
+        s_tuzzi->onSurfaceDestory();
+    }
+    if (window)
+    {
+        ANativeWindow_release(window);
+        window = nullptr;
+    }
+}
+
 void Java_com_tuzzi_lib_Tuzzi_destroy(JNIEnv *env, jobject obj) {
     g_env = env;
     g_jni_obj = obj;
@@ -69,13 +83,6 @@ void Java_com_tuzzi_lib_Tuzzi_destroy(JNIEnv *env, jobject obj) {
         s_tuzzi->destroy();
         delete s_tuzzi;
         s_tuzzi = nullptr;
-    }
-
-    if (window)
-    {
-
-        ANativeWindow_release(window);
-        window = nullptr;
     }
 }
 

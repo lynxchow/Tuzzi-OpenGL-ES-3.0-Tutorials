@@ -81,6 +81,7 @@ public class TuzziView extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
+        mTuzzi.onSurfaceDestroy();
         postEvent(new Runnable() {
             @Override
             public void run() {
