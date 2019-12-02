@@ -30,8 +30,9 @@ void DemoApplication::onInit()
 void DemoApplication::onUpdate()
 {
     TZ_LOGD("DemoApplication", "onUpdate");
-    
+    // 设置清屏的颜色
     glClearColor(0.0, 0.5, 0.5, 1.0);
+    // 执行清屏
     glClear(GL_COLOR_BUFFER_BIT);
 }
 

@@ -5,10 +5,8 @@
 //  Created by Lyn on 2019/11/20.
 //
 
-#ifndef _TUZZU_GL_H_
-#define _TUZZU_GL_H_
-
-
+#ifndef _TUZZI_GL_H_
+#define _TUZZI_GL_H_
 
 #if defined(__APPLE__)
 
