@@ -1,9 +1,7 @@
 #include <stdint.h>
 #include <unistd.h>
-#include <pthread.h>
 #include <android/native_window.h>
 #include <EGL/egl.h>
-#include <GLES/gl.h>
 
 #include "Log.h"
 #include "Tuzzi.h"
@@ -76,9 +74,9 @@ bool TuzziAndroid::initialize()
         return false;
     }
 
-    ANativeWindow_setBuffersGeometry(_window, 0, 0, format);
+    ANativeWindow_setBuffersGeometry(m_window, 0, 0, format);
 
-    if (!(surface = eglCreateWindowSurface(display, config, _window, 0))) {
+    if (!(surface = eglCreateWindowSurface(display, config, m_window, 0))) {
         TZ_LOGE("TuzziAndroid", "eglCreateWindowSurface() returned error %d", eglGetError());
         destroy();
         return false;
