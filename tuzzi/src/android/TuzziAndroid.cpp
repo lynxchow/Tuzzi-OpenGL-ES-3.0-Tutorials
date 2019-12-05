@@ -37,6 +37,7 @@ void TuzziAndroid::pause()
 
 bool TuzziAndroid::initialize()
 {
+    // 查找可用的surface配置
     const EGLint attribs[] = {
         EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
         EGL_BLUE_SIZE, 8,
@@ -52,7 +53,8 @@ bool TuzziAndroid::initialize()
     EGLContext context;
     EGLint width;
     EGLint height;
-    
+
+    // 创建并初始化一个与本地EGL dispaly的连接
     if ((display = eglGetDisplay(EGL_DEFAULT_DISPLAY)) == EGL_NO_DISPLAY) {
         TZ_LOGE("TuzziAndroid", "eglGetDisplay() returned error %d", eglGetError());
         return false;
@@ -61,7 +63,7 @@ bool TuzziAndroid::initialize()
         TZ_LOGE("TuzziAndroid", "eglInitialize() returned error %d", eglGetError());
         return false;
     }
-
+    // 让EGL推荐匹配的EGLConfig
     if (!eglChooseConfig(display, attribs, &config, 1, &numConfigs)) {
         TZ_LOGE("TuzziAndroid", "eglChooseConfig() returned error %d", eglGetError());
         destroy();
@@ -76,29 +78,31 @@ bool TuzziAndroid::initialize()
 
     ANativeWindow_setBuffersGeometry(m_window, 0, 0, format);
 
+    // 创建窗口
     if (!(surface = eglCreateWindowSurface(display, config, m_window, 0))) {
         TZ_LOGE("TuzziAndroid", "eglCreateWindowSurface() returned error %d", eglGetError());
         destroy();
         return false;
     }
 
+    // 渲染上下文的属性，因为要用的是ES 3.0的版本，所以版本信息要初始化为3
     const EGLint context_attribs[] = {
             EGL_CONTEXT_CLIENT_VERSION, 3,
             EGL_NONE
     };
-    
+    // 创建渲染上下文
     if (!(context = eglCreateContext(display, config, nullptr, context_attribs))) {
         TZ_LOGE("TuzziAndroid", "eglCreateContext() returned error %d", eglGetError());
         destroy();
         return false;
     }
-    
+    // 把 EGLContext 和 EGLSurface 关联起来
     if (!eglMakeCurrent(display, surface, surface, context)) {
         TZ_LOGE("TuzziAndroid", "eglMakeCurrent() returned error %d", eglGetError());
         destroy();
         return false;
     }
-
+    // 获取surface宽高
     if (!eglQuerySurface(display, surface, EGL_WIDTH, &width) ||
         !eglQuerySurface(display, surface, EGL_HEIGHT, &height)) {
         TZ_LOGE("TuzziAndroid", "eglQuerySurface() returned error %d", eglGetError());
@@ -115,6 +119,7 @@ bool TuzziAndroid::initialize()
 
 void TuzziAndroid::onSurfaceDestory()
 {
+    // 销毁Context，并释放资源
     eglMakeCurrent(m_display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
     eglDestroyContext(m_display, m_context);
     eglDestroySurface(m_display, m_surface);
