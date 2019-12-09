@@ -25,6 +25,16 @@ bool TuzziAndroid::loadApplication(SharedPtr<tuzzi::Application> application)
     return tuzzi::Tuzzi::instance()->loadApplication(application);
 }
 
+bool unloadApplication()
+{
+    return tuzzi::Tuzzi::instance()->unloadApplication();
+}
+
+tuzzi::Application *currentApplication()
+{
+    return tuzzi::Tuzzi::instance()->currentApplication().get();
+}
+
 void TuzziAndroid::resume()
 {
 

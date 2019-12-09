@@ -14,6 +14,10 @@ public:
 
     bool loadApplication(SharedPtr<tuzzi::Application> application);
 
+    bool unloadApplication();
+
+    tuzzi::Application * currentApplication();
+
     void pause();
 
     void resume();

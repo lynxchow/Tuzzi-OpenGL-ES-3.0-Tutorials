@@ -52,8 +52,6 @@
 - (void)drawFrame
 {
     [m_context makeCurrentContext];
-    glClearColor(0.0, 0.5, 0.5, 1.0);
-    glClear(GL_COLOR_BUFFER_BIT);
     tuzzi::Tuzzi::instance()->update();
     [m_context flushBuffer];
 }
