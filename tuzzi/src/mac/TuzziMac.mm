@@ -39,6 +39,7 @@
         [m_context makeCurrentContext];
         
         tuzzi::Tuzzi::instance()->init();
+        tuzzi::Tuzzi::instance()->setSize(frameRect.size.width, frameRect.size.height);
     }
     
     return self;

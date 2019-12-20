@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C2C6B5823AD3A5100C85A09 /* ColorApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C6B5623AD3A5100C85A09 /* ColorApplication.cpp */; };
 		3C411084238536D700279AC3 /* DemoApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C411082238536D600279AC3 /* DemoApplication.cpp */; };
 		3CA17A54237AC0A60046975B /* libTuzzi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CA17A53237AC0A60046975B /* libTuzzi.a */; };
 		3CDAC241238159B60004F5F2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDAC23F238159B60004F5F2 /* AppDelegate.m */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C2C6B5623AD3A5100C85A09 /* ColorApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ColorApplication.cpp; path = ../Tutorial_02/ColorApplication.cpp; sourceTree = "<group>"; };
+		3C2C6B5723AD3A5100C85A09 /* ColorApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorApplication.h; path = ../Tutorial_02/ColorApplication.h; sourceTree = "<group>"; };
 		3C411082238536D600279AC3 /* DemoApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DemoApplication.cpp; path = ../Tutorial_01/DemoApplication.cpp; sourceTree = "<group>"; };
 		3C411083238536D600279AC3 /* DemoApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DemoApplication.h; path = ../Tutorial_01/DemoApplication.h; sourceTree = "<group>"; };
 		3CA17A4F237AB5EB0046975B /* libTuzzi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libTuzzi.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,11 +47,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3C411081238536B200279AC3 /* Tutorial */ = {
+		3C2C6B5423AD3A2700C85A09 /* Tutorial01 */ = {
 			isa = PBXGroup;
 			children = (
 				3C411082238536D600279AC3 /* DemoApplication.cpp */,
 				3C411083238536D600279AC3 /* DemoApplication.h */,
+			);
+			name = Tutorial01;
+			sourceTree = "<group>";
+		};
+		3C2C6B5523AD3A3B00C85A09 /* Tutorial02 */ = {
+			isa = PBXGroup;
+			children = (
+				3C2C6B5623AD3A5100C85A09 /* ColorApplication.cpp */,
+				3C2C6B5723AD3A5100C85A09 /* ColorApplication.h */,
+			);
+			name = Tutorial02;
+			sourceTree = "<group>";
+		};
+		3C411081238536B200279AC3 /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				3C2C6B5523AD3A3B00C85A09 /* Tutorial02 */,
+				3C2C6B5423AD3A2700C85A09 /* Tutorial01 */,
 				3CDAC240238159B60004F5F2 /* AppDelegate.h */,
 				3CDAC23F238159B60004F5F2 /* AppDelegate.m */,
 				3CDAC243238159DC0004F5F2 /* ViewController.h */,
@@ -159,6 +180,7 @@
 				3CDAC244238159DC0004F5F2 /* ViewController.mm in Sources */,
 				3C411084238536D700279AC3 /* DemoApplication.cpp in Sources */,
 				3CDAC241238159B60004F5F2 /* AppDelegate.m in Sources */,
+				3C2C6B5823AD3A5100C85A09 /* ColorApplication.cpp in Sources */,
 				3CDAC24923815A050004F5F2 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

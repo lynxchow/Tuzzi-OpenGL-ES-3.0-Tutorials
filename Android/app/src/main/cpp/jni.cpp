@@ -22,6 +22,7 @@
 #include "Tuzzi.h"
 #include "string/String.h"
 #include "Tutorial_01/DemoApplication.h"
+#include "Tutorial_02/ColorApplication.h"
 #include "android/TuzziAndroid.h"
 
 using namespace tuzzi;
@@ -53,7 +54,7 @@ Java_com_tuzzi_lib_Tuzzi_create(JNIEnv *env, jobject obj, jobject surface, jint 
         window = ANativeWindow_fromSurface(env, surface);
         s_tuzzi = new TuzziAndroid(window);
 
-        SharedPtr<Application> app = MakeShared<DemoApplication>();
+        SharedPtr<Application> app = MakeShared<ColorApplication>();
         s_tuzzi->loadApplication(app);
     }
 

@@ -119,6 +119,7 @@ bool TuzziAndroid::initialize()
         destroy();
         return false;
     }
+    tuzzi::Tuzzi::instance()->setSize(width, height);
 
     m_display = display;
     m_surface = surface;

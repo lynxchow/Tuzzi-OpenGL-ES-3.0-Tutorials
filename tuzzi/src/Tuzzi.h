@@ -30,6 +30,7 @@ public:
     bool loadApplication(SharedPtr<Application> app);
     bool unloadApplication();
     SharedPtr<Application> currentApplication();
+    void setSize(int width, int height);
     void init();
     void destroy();
     void update();

@@ -68,11 +68,14 @@ elseif (${Target} MATCHES "Android")
      add_library(TuzziApp SHARED
           ${CMAKE_SOURCE_DIR}/../Tutorial_01/DemoApplication.h
           ${CMAKE_SOURCE_DIR}/../Tutorial_01/DemoApplication.cpp
+          ${CMAKE_SOURCE_DIR}/../Tutorial_02/ColorApplication.h
+          ${CMAKE_SOURCE_DIR}/../Tutorial_02/ColorApplication.cpp
           ${CMAKE_SOURCE_DIR}/../Android/app/src/main/cpp/jni.cpp
           )
 
      file(GLOB TUZZI_TUTORIAL_SRCS
           ${CMAKE_SOURCE_DIR}/../Tutorial_01/DemoApplication.cpp
+          ${CMAKE_SOURCE_DIR}/../Tutorial_01/ColorApplication.cpp
           ${CMAKE_SOURCE_DIR}/../Android/app/src/main/cpp/jni.cpp
           )
 
@@ -88,6 +91,7 @@ elseif (${Target} MATCHES "Windows")
 
 	file(GLOB TUZZI_TUTORIAL_SRCS
           ${CMAKE_SOURCE_DIR}/../Tutorial_01/DemoApplication.cpp
+          ${CMAKE_SOURCE_DIR}/../Tutorial_02/ColorApplication.cpp
           ${CMAKE_SOURCE_DIR}/../Windows/main.cpp
           )
 	add_executable(TuzziApp

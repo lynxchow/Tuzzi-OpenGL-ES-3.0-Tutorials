@@ -94,6 +94,8 @@
         
         
         tuzzi::Tuzzi::instance()->init();
+        CGFloat scale = [UIScreen mainScreen].scale;
+        tuzzi::Tuzzi::instance()->setSize(frame.size.width * scale, frame.size.height * scale);
     }
     
     return self;

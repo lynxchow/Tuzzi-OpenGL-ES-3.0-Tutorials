@@ -10,7 +10,7 @@
 
 NAMESPACE_TUZZI_ENGINE_BEGIN
     
-Application::Application()
+Application::Application() : m_width(0), m_height(0)
 {
     
 }
@@ -26,7 +26,32 @@ void Application::init()
     this->onInit();
 }
 
+void Application::setSize(int width, int height)
+{
+    if (m_width != width || m_height != height)
+    {
+        m_width = width;
+        m_height = height;
+        onResize(width, height);
+    }
+}
+
+unsigned int Application::getWidth()
+{
+    return m_width;
+}
+
+unsigned int Application::getHeight()
+{
+    return m_height;
+}
+
 void Application::onInit()
+{
+    
+}
+
+void Application::onResize(int width, int height)
 {
     
 }

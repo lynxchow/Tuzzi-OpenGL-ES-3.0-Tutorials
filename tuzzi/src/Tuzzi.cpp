@@ -22,6 +22,12 @@ public:
     bool loadApplication(SharedPtr<Application> application)
     {
         m_application = application;
+        
+        if (m_application)
+        {
+            m_application->setSize(m_width, m_height);
+        }
+        
         return true;
     }
     
@@ -46,7 +52,18 @@ public:
     {
         if (m_application)
         {
+            m_application->setSize(m_width, m_height);
             m_application->init();
+        }
+    }
+    
+    void setSize(int width, int height)
+    {
+        m_width = width;
+        m_height = height;
+        if (m_application)
+        {
+            m_application->setSize(width, height);
         }
     }
     
@@ -73,6 +90,8 @@ public:
     
 private:
     SharedPtr<Application> m_application;
+    unsigned int m_width;
+    unsigned int m_height;
     
 };
 
@@ -115,6 +134,11 @@ SharedPtr<Application> Tuzzi::currentApplication()
 void Tuzzi::init()
 {
     m_impl->init();
+}
+
+void Tuzzi::setSize(int width, int height)
+{
+    m_impl->setSize(width, height);
 }
 
 void Tuzzi::destroy()
