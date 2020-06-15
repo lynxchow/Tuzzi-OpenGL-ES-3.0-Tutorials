@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C20279723B0F91200CFE0F8 /* res in Resources */ = {isa = PBXBuildFile; fileRef = 3C20279623B0F91200CFE0F8 /* res */; };
 		3C2C6B5123AD2A4A00C85A09 /* ColorApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C6B4F23AD2A4A00C85A09 /* ColorApplication.cpp */; };
+		3C2C6B5C23AE6B2C00C85A09 /* TextureApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C2C6B5B23AE6B2C00C85A09 /* TextureApplication.cpp */; };
 		3C9EC6BD238050A800A8141D /* DemoApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EC6BC238050A800A8141D /* DemoApplication.cpp */; };
 		3CA1780623714ADA0046975B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA1780323714ADA0046975B /* main.m */; };
 		3CA1780A23714B1C0046975B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CA1780823714B1C0046975B /* Assets.xcassets */; };
@@ -17,8 +19,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C20279623B0F91200CFE0F8 /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; name = res; path = ../res; sourceTree = "<group>"; };
 		3C2C6B4F23AD2A4A00C85A09 /* ColorApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ColorApplication.cpp; path = ../Tutorial_02/ColorApplication.cpp; sourceTree = "<group>"; };
 		3C2C6B5023AD2A4A00C85A09 /* ColorApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorApplication.h; path = ../Tutorial_02/ColorApplication.h; sourceTree = "<group>"; };
+		3C2C6B5A23AE6B2C00C85A09 /* TextureApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextureApplication.h; path = ../Tutorial_03/TextureApplication.h; sourceTree = "<group>"; };
+		3C2C6B5B23AE6B2C00C85A09 /* TextureApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextureApplication.cpp; path = ../Tutorial_03/TextureApplication.cpp; sourceTree = "<group>"; };
 		3C9EC6BB238050A800A8141D /* DemoApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DemoApplication.h; path = ../Tutorial_01/DemoApplication.h; sourceTree = "<group>"; };
 		3C9EC6BC238050A800A8141D /* DemoApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DemoApplication.cpp; path = ../Tutorial_01/DemoApplication.cpp; sourceTree = "<group>"; };
 		3CA1780323714ADA0046975B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -62,11 +67,22 @@
 			name = Tutorial02;
 			sourceTree = "<group>";
 		};
+		3C2C6B5923AE6B0A00C85A09 /* Tutorial03 */ = {
+			isa = PBXGroup;
+			children = (
+				3C2C6B5B23AE6B2C00C85A09 /* TextureApplication.cpp */,
+				3C2C6B5A23AE6B2C00C85A09 /* TextureApplication.h */,
+			);
+			name = Tutorial03;
+			sourceTree = "<group>";
+		};
 		3CA1780223714AAC0046975B /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
+				3C20279623B0F91200CFE0F8 /* res */,
 				3C2C6B5223AD2A7500C85A09 /* Tutorial01 */,
 				3C2C6B5323AD2A8A00C85A09 /* Tutorial02 */,
+				3C2C6B5923AE6B0A00C85A09 /* Tutorial03 */,
 				D4BB41312378153700EC82BA /* AppDelegate.h */,
 				D4BB41322378153700EC82BA /* AppDelegate.mm */,
 				D4BB412E2378150900EC82BA /* ViewController.h */,
@@ -161,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CA1780A23714B1C0046975B /* Assets.xcassets in Resources */,
+				3C20279723B0F91200CFE0F8 /* res in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +190,7 @@
 			files = (
 				3CA1780623714ADA0046975B /* main.m in Sources */,
 				3C9EC6BD238050A800A8141D /* DemoApplication.cpp in Sources */,
+				3C2C6B5C23AE6B2C00C85A09 /* TextureApplication.cpp in Sources */,
 				D4BB41332378153700EC82BA /* AppDelegate.mm in Sources */,
 				3C2C6B5123AD2A4A00C85A09 /* ColorApplication.cpp in Sources */,
 				D4BB41302378150900EC82BA /* ViewController.mm in Sources */,
@@ -312,6 +330,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_LDFLAGS = "-lz.1.2.8";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -335,6 +354,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_LDFLAGS = "-lz.1.2.8";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

@@ -73,6 +73,18 @@
     return tuzzi::Tuzzi::instance()->currentApplication().get();
 }
 
+const tuzzi::String& tuzzi::Tuzzi::getEnginePath()
+{
+    static tuzzi::String s_engine_path;
+    if (s_engine_path.empty())
+    {
+        s_engine_path = [[[NSBundle mainBundle] resourcePath] UTF8String];
+        s_engine_path += "/res";
+    }
+    
+    return s_engine_path;
+}
+
 - (void)dealloc
 {
     tuzzi::Tuzzi::instance()->destroy();

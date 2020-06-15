@@ -10,6 +10,7 @@
 #import "TuzziMac.h"
 #include "DemoApplication.h"
 #include "ColorApplication.h"
+#include "TextureApplication.h"
 
 @interface FrameHandler : NSObject
 {
@@ -58,7 +59,7 @@ NAMESPACE_TUZZI_ENGINE_USING
     m_timer = [NSTimer timerWithTimeInterval:1.0f / 60.0 target:m_frame_handler selector:@selector(updateFrame) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:m_timer forMode:NSDefaultRunLoopMode];
     
-    SharedPtr<Application> app = MakeShared<ColorApplication>();
+    SharedPtr<Application> app = MakeShared<TextureApplication>();
     [m_engine loadApplication:app];
 }
 

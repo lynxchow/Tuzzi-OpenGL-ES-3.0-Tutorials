@@ -6,13 +6,14 @@
 //  Copyright © 2019 Vin-Ex. All rights reserved.
 //
 
-#ifndef _TUZZI_SYSTEM_H_
-#define _TUZZI_SYSTEM_H_
+#ifndef _TUZZI_APPLICATION_H_
+#define _TUZZI_APPLICATION_H_
 
 #include "Object.h"
 
 NAMESPACE_TUZZI_ENGINE_BEGIN
 
+class ResourceManager;
 class Application : public Object
 {
 public:
@@ -31,6 +32,7 @@ private:
     void update();
     void lateUpdate();
     void destroy();
+    
     virtual void onInit();
     virtual void onResize(int width, int height);
     virtual void onUpdate();
@@ -39,6 +41,7 @@ private:
     
     unsigned int m_width;
     unsigned int m_height;
+    
     bool m_is_started = false;
 };
 

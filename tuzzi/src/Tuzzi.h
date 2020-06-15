@@ -6,8 +6,8 @@
 //  Copyright © 2019 Vin-Ex. All rights reserved.
 //
 
-#ifndef _TUZZI_REATRIX_H_
-#define _TUZZI_REATRIX_H_
+#ifndef _TUZZI_TUZZI_H_
+#define _TUZZI_TUZZI_H_
 
 #include <stdio.h>
 #include "Common.h"
@@ -18,6 +18,7 @@ NAMESPACE_TUZZI_ENGINE_BEGIN
 
 class Application;
 class TuzziImpl;
+class ResourceManager;
 
 class Tuzzi
 {
@@ -29,7 +30,11 @@ public:
     virtual ~Tuzzi();
     bool loadApplication(SharedPtr<Application> app);
     bool unloadApplication();
+    
     SharedPtr<Application> currentApplication();
+    ResourceManager *getResourceManager() const;
+    const String& getEnginePath();
+    
     void setSize(int width, int height);
     void init();
     void destroy();

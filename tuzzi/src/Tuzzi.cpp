@@ -8,6 +8,7 @@
 
 #include "Tuzzi.h"
 #include "Application.h"
+#include "ResourceManager.h"
 
 NAMESPACE_TUZZI_ENGINE_BEGIN
 
@@ -50,11 +51,18 @@ public:
     
     void init()
     {
+        m_resource_manager.init();
+        
         if (m_application)
         {
             m_application->setSize(m_width, m_height);
             m_application->init();
         }
+    }
+    
+    ResourceManager *getResourceManager()
+    {
+        return &m_resource_manager;
     }
     
     void setSize(int width, int height)
@@ -74,6 +82,7 @@ public:
             m_application->destroy();
             m_application = nullptr;
         }
+        m_resource_manager.destroy();
     }
     
     void update()
@@ -90,6 +99,8 @@ public:
     
 private:
     SharedPtr<Application> m_application;
+    ResourceManager m_resource_manager;
+    
     unsigned int m_width;
     unsigned int m_height;
     
@@ -118,7 +129,8 @@ Tuzzi::~Tuzzi()
 
 bool Tuzzi::loadApplication(SharedPtr<Application> app)
 {
-    return m_impl->loadApplication(app);
+    m_impl->loadApplication(app);
+    return true;
 }
 
 bool Tuzzi::unloadApplication()
@@ -134,6 +146,11 @@ SharedPtr<Application> Tuzzi::currentApplication()
 void Tuzzi::init()
 {
     m_impl->init();
+}
+
+ResourceManager *Tuzzi::getResourceManager() const
+{
+    return m_impl->getResourceManager();
 }
 
 void Tuzzi::setSize(int width, int height)
