@@ -21,7 +21,7 @@
     auto frame = [NSWindow frameRectForContentRect:NSMakeRect(0, 0, 1280, 720) styleMask:style];
     
     self.window = [[NSWindow alloc] initWithContentRect:frame styleMask:style backing:NSBackingStoreBuffered defer:YES];
-    self.window.title = @"Tuzzi Application";
+    self.window.title = @"Tuzzi Demo";
     [self.window center];
     [self.window makeKeyAndOrderFront:self.window];
     

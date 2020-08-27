@@ -18,8 +18,8 @@ enum class ImageFormat
 {
     None = 0,
     R8,
-    R8G8B8,
-    R8G8B8A8,
+    RGB888,
+    RGBA8888,
 };
 
 class Image : public Object

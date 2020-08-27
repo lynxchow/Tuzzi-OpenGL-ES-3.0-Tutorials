@@ -18,6 +18,7 @@ class Debug
 {
 public:
     static void log(LogLevel level, const char *format, ...);
+    
     static void filterLogLevel(LogLevel level);
 };
 

@@ -9,6 +9,7 @@
 #include "TextureApplication.h"
 #include "Tuzzi.h"
 #include "gl/gl.h"
+#include "graphics/Texture.h"
 #include "ResourceManager.h"
 
 NAMESPACE_TUZZI_ENGINE_USING
@@ -25,7 +26,7 @@ TextureApplication::~TextureApplication()
 
 void TextureApplication::onInit()
 {
-    m_shader = Tuzzi::instance()->getResourceManager()->loadShader("shader/texture.vert", "shader/texture.frag");
+    m_shader = getTuzzi()->getResourceManager()->loadShader("shader/texture.vert", "shader/texture.frag");
 
     // 设置3个顶点，每个顶点有1个vec3的位置信息和1个vec3的颜色信息
     float vertices[] =
@@ -93,24 +94,7 @@ void TextureApplication::onInit()
     // 终于处理完VAO的配置了，这个时候就可以解除绑定VAO啦，免得后面又不小心误操作了VAO
     glBindVertexArray(0);
     
-    // load and create a texture
-    glGenTextures(1, &m_texture);
-    glBindTexture(GL_TEXTURE_2D, m_texture); // all upcoming GL_TEXTURE_2D operations now have effect on this texture object
-    // set the texture wrapping parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);    // set texture wrapping to GL_REPEAT (default wrapping method)
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    // set texture filtering parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    
-    SharedPtr<tuzzi::Image> image = Tuzzi::instance()->getResourceManager()->loadImage("image/box.jpg");
-    // load image, create texture and generate mipmaps
-    if (image)
-    {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->width, image->height, 0, GL_RGB, GL_UNSIGNED_BYTE, image->data.bytes());
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-
+    m_texture = getTuzzi()->getResourceManager()->loadTexture("image/box.jpg", FilterMode::Linear, WrapMode::Repeat, true);
 }
 
 void TextureApplication::onUpdate()
@@ -123,8 +107,8 @@ void TextureApplication::onUpdate()
     // 参数传GL_COLOR_BUFFER_BIT，代表glClear清除的是颜色缓冲区
     glClear(GL_COLOR_BUFFER_BIT);
 
-    // bind Texture
-    glBindTexture(GL_TEXTURE_2D, m_texture);
+//    // bind Texture
+//    glBindTexture(GL_TEXTURE_2D, *static_cast<GLuint *>(m_texture->getHandle()));
     
     // 使用我们的shader
     m_shader->use();
@@ -144,5 +128,4 @@ void TextureApplication::onDestroy()
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
-    glDeleteTextures(1, &m_texture);
 }

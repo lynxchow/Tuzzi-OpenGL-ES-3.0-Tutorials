@@ -19,9 +19,13 @@ class Object
 {
 public:
     Object();
+    
     virtual ~Object();
+    
     unsigned int getUUID() const;
+    
     const String& getName() const;
+    
     void setName(const String& name);
     
 private:

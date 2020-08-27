@@ -11,6 +11,7 @@
 
 #include "Application.h"
 #include "Shader.h"
+#include "graphics/Texture.h"
 
 class TextureApplication : public tuzzi::Application
 {
@@ -20,7 +21,7 @@ public:
     
 private:
     unsigned int VBO, VAO, EBO;
-    unsigned int m_texture;
+    SharedPtr<tuzzi::Texture> m_texture;
     
     SharedPtr<tuzzi::Shader> m_shader;
     virtual void onInit() override;

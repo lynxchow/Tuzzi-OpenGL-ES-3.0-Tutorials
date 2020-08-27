@@ -10,9 +10,12 @@
 #include "Tuzzi.h"
 #include "gl/gl.h"
 
+NAMESPACE_TUZZI_ENGINE_USING
+
 @interface TuzziMac()
 {
     NSView *m_view;
+    Tuzzi *m_tuzzi;
     NSOpenGLContext *m_context;
 }
 @end
@@ -38,8 +41,10 @@
         [m_context setView:m_view];
         [m_context makeCurrentContext];
         
-        tuzzi::Tuzzi::instance()->init();
-        tuzzi::Tuzzi::instance()->setSize(frameRect.size.width, frameRect.size.height);
+        m_tuzzi = new Tuzzi();
+        m_tuzzi->init();
+        NSRect realRect = [m_view convertRectToBacking:frameRect];
+        m_tuzzi->setSize(realRect.size.width, realRect.size.height);
     }
     
     return self;
@@ -53,27 +58,27 @@
 - (void)drawFrame
 {
     [m_context makeCurrentContext];
-    tuzzi::Tuzzi::instance()->update();
+    m_tuzzi->update();
     [m_context flushBuffer];
 }
 
 - (BOOL)loadApplication:(SharedPtr<tuzzi::Application>)application
 {
-    tuzzi::Tuzzi::instance()->loadApplication(application);
+    m_tuzzi->loadApplication(application);
     return YES;
 }
 
 - (BOOL)unloadApplication
 {
-    return tuzzi::Tuzzi::instance()->unloadApplication();
+    return m_tuzzi->unloadApplication();
 }
 
 - (tuzzi::Application *)currentApplication
 {
-    return tuzzi::Tuzzi::instance()->currentApplication().get();
+    return m_tuzzi->currentApplication().get();
 }
 
-const tuzzi::String& tuzzi::Tuzzi::getEnginePath()
+const tuzzi::String& tuzzi::Tuzzi::getResourcePath()
 {
     static tuzzi::String s_engine_path;
     if (s_engine_path.empty())
@@ -87,7 +92,7 @@ const tuzzi::String& tuzzi::Tuzzi::getEnginePath()
 
 - (void)dealloc
 {
-    tuzzi::Tuzzi::instance()->destroy();
+    m_tuzzi->destroy();
     [m_context release];
     [super dealloc];
 }

@@ -20,10 +20,14 @@ Application::~Application()
     
 }
 
-void Application::init()
+void Application::init(Tuzzi *tuzzi)
 {
-    m_is_started = true;
-    this->onInit();
+    m_tuzzi = tuzzi;
+    if (!m_is_started)
+    {
+        m_is_started = true;
+        this->onInit();
+    }
 }
 
 void Application::setSize(int width, int height)
@@ -44,6 +48,11 @@ unsigned int Application::getWidth()
 unsigned int Application::getHeight()
 {
     return m_height;
+}
+
+Tuzzi *Application::getTuzzi() const
+{
+    return m_tuzzi;
 }
 
 void Application::onInit()

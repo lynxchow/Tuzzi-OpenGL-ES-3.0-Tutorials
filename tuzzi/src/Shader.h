@@ -19,14 +19,18 @@ class Shader
 {
 public:
     Shader();
+    
     bool initWithFile(const char *vertexPath, const char *fragmentPath);
+    
     bool initWithSource(const char *vertexSource, const char *fragmentSource);
+    
     void use();
     
 private:
-    GLuint m_id;
-    
     bool checkCompileErrors(GLuint shader, const std::string &type);
+    
+private:
+    GLuint m_id;
 };
 
 NAMESPACE_TUZZI_ENGINE_END

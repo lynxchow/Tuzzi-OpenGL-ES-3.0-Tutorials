@@ -13,6 +13,7 @@
 #include "Common.h"
 #include "Log.h"
 #include "SharedPtr.h"
+#include "ResourceManager.h"
 
 NAMESPACE_TUZZI_ENGINE_BEGIN
 
@@ -22,26 +23,34 @@ class ResourceManager;
 
 class Tuzzi
 {
-private:
+public:
     Tuzzi();
     
-public:
-    static Tuzzi *instance();
     virtual ~Tuzzi();
+    
     bool loadApplication(SharedPtr<Application> app);
+    
     bool unloadApplication();
     
     SharedPtr<Application> currentApplication();
-    ResourceManager *getResourceManager() const;
-    const String& getEnginePath();
+    
+    ResourceManager *getResourceManager();
+    
+    const String& getResourcePath();
     
     void setSize(int width, int height);
+    
     void init();
+    
     void destroy();
+    
     void update();
     
 private:
-    TuzziImpl *m_impl;
+    SharedPtr<Application> m_application;
+    ResourceManager m_resource_manager;
+    unsigned int m_width;
+    unsigned int m_height;
 };
 
 NAMESPACE_TUZZI_ENGINE_END

@@ -83,10 +83,10 @@ SharedPtr<Image> Image::loadJPEG(const ByteBuffer& jpeg)
             image->format = ImageFormat::R8;
             break;
         case 24:
-            image->format = ImageFormat::R8G8B8;
+            image->format = ImageFormat::RGB888;
             break;
         case 32:
-            image->format = ImageFormat::R8G8B8A8;
+            image->format = ImageFormat::RGBA8888;
             break;
     }
 
@@ -163,7 +163,7 @@ SharedPtr<Image> Image::loadPNG(const ByteBuffer& png)
         png_bytep* row_pointers = png_get_rows(png_ptr, info_ptr);
 
         image->data = ByteBuffer(image->width * image->height * 4);
-        image->format = ImageFormat::R8G8B8A8;
+        image->format = ImageFormat::RGBA8888;
 
         unsigned char* pPixel = image->data.bytes();
 
@@ -178,7 +178,7 @@ SharedPtr<Image> Image::loadPNG(const ByteBuffer& png)
         png_bytep* row_pointers = png_get_rows(png_ptr, info_ptr);
 
         image->data = ByteBuffer(image->width * image->height * 3);
-        image->format = ImageFormat::R8G8B8;
+        image->format = ImageFormat::RGB888;
 
         unsigned char* pPixel = image->data.bytes();
 
@@ -208,7 +208,7 @@ SharedPtr<Image> Image::loadPNG(const ByteBuffer& png)
         png_bytep* row_pointers = png_get_rows(png_ptr, info_ptr);
 
         image->data = ByteBuffer(image->width * image->height * 4);
-        image->format = ImageFormat::R8G8B8A8;
+        image->format = ImageFormat::RGBA8888;
 
         byte* pPixel = image->data.bytes();
 
@@ -243,11 +243,11 @@ void Image::encodeToPNG(const String& file)
     int bpp;
     switch (this->format)
     {
-        case ImageFormat::R8G8B8A8:
+        case ImageFormat::RGBA8888:
             color_type = PNG_COLOR_TYPE_RGBA;
             bpp = 32;
             break;
-        case ImageFormat::R8G8B8:
+        case ImageFormat::RGB888:
             color_type = PNG_COLOR_TYPE_RGB;
             bpp = 24;
             break;

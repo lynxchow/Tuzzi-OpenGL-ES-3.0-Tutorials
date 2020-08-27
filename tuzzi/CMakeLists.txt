@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.7.2)
 
 project(Tuzzi)
 
@@ -11,23 +11,6 @@ include_directories(${CMAKE_SOURCE_DIR}/src)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DENABLE_LOG")
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -DENABLE_LOG")
-
-file(GLOB TUZZI_LIB_SRCS
-     ${TUZZI_LIB_DIR}/*.h
-     ${TUZZI_LIB_DIR}/*.cpp
-     ${TUZZI_LIB_DIR}/string/*.h
-     ${TUZZI_LIB_DIR}/string/*.cpp
-     ${TUZZI_LIB_DIR}/gl/*.h
-     ${TUZZI_LIB_DIR}/gl/*.cpp
-     ${TUZZI_LIB_DIR}/io/*.h
-     ${TUZZI_LIB_DIR}/io/*.cpp
-     ${TUZZI_LIB_DIR}/memory/*.h
-     ${TUZZI_LIB_DIR}/memory/*.cpp
-     ${TUZZI_LIB_DIR}/image/*.h
-     ${TUZZI_LIB_DIR}/image/*.cpp
-     )
-
-source_group(TREE ${TUZZI_LIB_DIR}/.. FILES ${TUZZI_LIB_SRCS})
 
 file(GLOB TUZZI_DEP_SRCS
      ${TUZZI_LIB_DIR}/3rdparty/jpeg/jaricom.c
@@ -95,13 +78,41 @@ file(GLOB TUZZI_DEP_SRCS
      ${TUZZI_LIB_DIR}/3rdparty/zlib/unzip.c
      )
 
-add_library(Tuzzi ${TUZZI_LIB_SRCS})
 source_group(TREE ${TUZZI_LIB_DIR}/.. FILES ${TUZZI_DEP_SRCS})
-target_sources(Tuzzi PRIVATE ${TUZZI_DEP_SRCS})
+
+add_library(TuzziDep STATIC ${TUZZI_DEP_SRCS})
+
+target_include_directories(TuzziDep PRIVATE
+                           ${TUZZI_LIB_DIR}/
+                           ${TUZZI_LIB_DIR}/3rdparty/
+                           )
+
+file(GLOB TUZZI_LIB_SRCS
+     ${TUZZI_LIB_DIR}/*.h
+     ${TUZZI_LIB_DIR}/*.cpp
+     ${TUZZI_LIB_DIR}/string/*.h
+     ${TUZZI_LIB_DIR}/string/*.cpp
+     ${TUZZI_LIB_DIR}/gl/*.h
+     ${TUZZI_LIB_DIR}/gl/*.cpp
+     ${TUZZI_LIB_DIR}/io/*.h
+     ${TUZZI_LIB_DIR}/io/*.cpp
+     ${TUZZI_LIB_DIR}/memory/*.h
+     ${TUZZI_LIB_DIR}/memory/*.cpp
+     ${TUZZI_LIB_DIR}/image/*.h
+     ${TUZZI_LIB_DIR}/image/*.cpp
+     ${TUZZI_LIB_DIR}/graphics/*.h
+     ${TUZZI_LIB_DIR}/graphics/*.cpp
+     )
+
+source_group(TREE ${TUZZI_LIB_DIR}/.. FILES ${TUZZI_LIB_SRCS})
+
+add_library(Tuzzi STATIC ${TUZZI_LIB_SRCS})
+
 target_include_directories(Tuzzi PRIVATE
                            ${TUZZI_LIB_DIR}
                            ${TUZZI_LIB_DIR}/3rdparty)
 
+target_sources(Tuzzi PRIVATE ${TUZZI_LIB_SRCS})
 
 if (${Target} MATCHES "macOS")
      set(CMAKE_OSX_DEPLOYMENT_TARGET "10.10")
@@ -113,6 +124,7 @@ if (${Target} MATCHES "macOS")
      )
 
      source_group(TREE ${TUZZI_LIB_DIR}/.. FILES ${TUZZI_LIB_MAC_SRCS})
+
      target_sources(Tuzzi PRIVATE ${TUZZI_LIB_MAC_SRCS})
 
 elseif (${Target} MATCHES "iOS")
@@ -133,6 +145,7 @@ elseif (${Target} MATCHES "iOS")
           )
 
      source_group(TREE ${TUZZI_LIB_DIR}/.. FILES ${TUZZI_LIB_IOS_SRCS})
+
      target_sources(Tuzzi PRIVATE ${TUZZI_LIB_IOS_SRCS})
 
 elseif (${Target} MATCHES "Android")
