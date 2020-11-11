@@ -35,4 +35,4 @@ private:
 
 NAMESPACE_TUZZI_ENGINE_END
 
-#endif /* Object_hpp */
+#endif /* Object_h */

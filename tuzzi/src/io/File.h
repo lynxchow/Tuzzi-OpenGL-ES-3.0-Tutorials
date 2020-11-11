@@ -6,8 +6,8 @@
 //  Copyright © 2020 Vin-Ex. All rights reserved.
 //
 
-#ifndef _TUZZI_FILE_H_
-#define _TUZZI_FILE_H_
+#ifndef _TUZZI_IO_FILE_H_
+#define _TUZZI_IO_FILE_H_
 
 #include "Object.h"
 #include "memory/ByteBuffer.h"

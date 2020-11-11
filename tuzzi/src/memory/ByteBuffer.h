@@ -6,8 +6,8 @@
 //  Copyright © 2020 Vin-Ex. All rights reserved.
 //
 
-#ifndef _TUZZI_BYTE_BUFFER_H_
-#define _TUZZI_BYTE_BUFFER_H_
+#ifndef _TUZZI_MEMORY_BYTE_BUFFER_H_
+#define _TUZZI_MEMORY_BYTE_BUFFER_H_
 
 #include "Common.h"
 #include "SharedPtr.h"

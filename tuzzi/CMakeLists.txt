@@ -100,6 +100,10 @@ file(GLOB TUZZI_LIB_SRCS
      ${TUZZI_LIB_DIR}/memory/*.cpp
      ${TUZZI_LIB_DIR}/image/*.h
      ${TUZZI_LIB_DIR}/image/*.cpp
+     ${TUZZI_LIB_DIR}/math/*.h
+     ${TUZZI_LIB_DIR}/math/*.cpp
+     ${TUZZI_LIB_DIR}/container/*.h
+     ${TUZZI_LIB_DIR}/container/*.cpp
      ${TUZZI_LIB_DIR}/graphics/*.h
      ${TUZZI_LIB_DIR}/graphics/*.cpp
      )

@@ -1,5 +1,5 @@
 //
-//  Shader.hpp
+//  Shader.h
 //  Tuzzi
 //
 //  Created by Lyn on 2019/12/17.
@@ -15,10 +15,14 @@
 
 NAMESPACE_TUZZI_ENGINE_BEGIN
 
+using ShaderHandle = void *;
+
 class Shader
 {
 public:
     Shader();
+    
+    virtual ~Shader();
     
     bool initWithFile(const char *vertexPath, const char *fragmentPath);
     
@@ -27,10 +31,7 @@ public:
     void use();
     
 private:
-    bool checkCompileErrors(GLuint shader, const std::string &type);
-    
-private:
-    GLuint m_id;
+    ShaderHandle m_handle;
 };
 
 NAMESPACE_TUZZI_ENGINE_END

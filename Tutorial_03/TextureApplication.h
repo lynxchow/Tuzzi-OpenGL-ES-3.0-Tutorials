@@ -11,22 +11,26 @@
 
 #include "Application.h"
 #include "Shader.h"
+#include "graphics/Mesh.h"
 #include "graphics/Texture.h"
 
 class TextureApplication : public tuzzi::Application
 {
 public:
     TextureApplication();
+    
     virtual ~TextureApplication();
     
 private:
-    unsigned int VBO, VAO, EBO;
-    SharedPtr<tuzzi::Texture> m_texture;
-    
-    SharedPtr<tuzzi::Shader> m_shader;
     virtual void onInit() override;
+    
     virtual void onUpdate() override;
+    
     virtual void onDestroy() override;
+    
+    SharedPtr<tuzzi::Texture> m_texture;
+    SharedPtr<tuzzi::Mesh> m_mesh;
+    SharedPtr<tuzzi::Shader> m_shader;
 };
 
 #endif /* TextureApplication_h */

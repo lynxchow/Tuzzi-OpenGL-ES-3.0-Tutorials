@@ -15,9 +15,48 @@
 
 NAMESPACE_TUZZI_ENGINE_BEGIN
 
-Shader::Shader()
+Shader::Shader(): m_handle(new GLuint(0))
 {
     
+}
+
+Shader::~Shader()
+{
+    GLuint shader_id = *static_cast<GLuint *>(m_handle);
+    if (shader_id != 0)
+    {
+        glDeleteProgram(shader_id);
+    }
+    
+    delete static_cast<GLuint *>(m_handle);
+}
+
+static bool checkCompileErrors(GLuint shader, const std::string &type)
+{
+    GLint success;
+    GLchar infoLog[1024];
+    if(type != "PROGRAM")
+    {
+        glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+        if (!success)
+        {
+            glGetShaderInfoLog(shader, 1024, NULL, infoLog);
+            TZ_LOGE("SHADER", "%s compilation\n %s", type.c_str(), infoLog);
+            return false;
+        }
+    }
+    else
+    {
+        glGetProgramiv(shader, GL_LINK_STATUS, &success);
+        if (!success)
+        {
+            glGetProgramInfoLog(shader, 1024, NULL, infoLog);
+            TZ_LOGE("SHADER", "%s compilation\n %s", type.c_str(), infoLog);
+            return false;
+        }
+    }
+    
+    return true;
 }
 
 bool Shader::initWithFile(const char *vertexPath, const char *fragmentPath)
@@ -66,11 +105,12 @@ bool Shader::initWithSource(const char *vertexSource, const char *fragmentSource
     glCompileShader(fragment);
     result = result && checkCompileErrors(fragment, "FRAGMENT");
     
-    m_id = glCreateProgram();
-    glAttachShader(m_id, vertex);
-    glAttachShader(m_id, fragment);
-    glLinkProgram(m_id);
-    result = result && checkCompileErrors(m_id, "PROGRAM");
+    GLuint &shader_id = *static_cast<GLuint *>(m_handle);
+    shader_id = glCreateProgram();
+    glAttachShader(shader_id, vertex);
+    glAttachShader(shader_id, fragment);
+    glLinkProgram(shader_id);
+    result = result && checkCompileErrors(shader_id, "PROGRAM");
     
     glDeleteShader(vertex);
     glDeleteShader(fragment);
@@ -80,35 +120,7 @@ bool Shader::initWithSource(const char *vertexSource, const char *fragmentSource
 
 void Shader::use()
 {
-    glUseProgram(m_id);
-}
-
-bool Shader::checkCompileErrors(GLuint shader, const std::string &type)
-{
-    GLint success;
-    GLchar infoLog[1024];
-    if(type != "PROGRAM")
-    {
-        glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-        if (!success)
-        {
-            glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-            TZ_LOGE("SHADER", "%s compilation\n %s", type.c_str(), infoLog);
-            return false;
-        }
-    }
-    else
-    {
-        glGetProgramiv(shader, GL_LINK_STATUS, &success);
-        if (!success)
-        {
-            glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-            TZ_LOGE("SHADER", "%s compilation\n %s", type.c_str(), infoLog);
-            return false;
-        }
-    }
-    
-    return true;
+    glUseProgram(*static_cast<GLuint *>(m_handle));
 }
 
 NAMESPACE_TUZZI_ENGINE_END

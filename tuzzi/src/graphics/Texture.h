@@ -6,8 +6,8 @@
 //  Copyright © 2020 Vin-Ex. All rights reserved.
 //
 
-#ifndef _TUZZI_TEXTURE_H_
-#define _TUZZI_TEXTURE_H_
+#ifndef _TUZZI_GRAPHICS_TEXTURE_H_
+#define _TUZZI_GRAPHICS_TEXTURE_H_
 
 #include "Object.h"
 
