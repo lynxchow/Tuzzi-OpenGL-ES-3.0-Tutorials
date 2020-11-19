@@ -1,7 +1,7 @@
 #! /bin/bash
-if [ ! -d "tuzzi/build/iOS" ]; then
-    mkdir -p tuzzi/build/iOS
+if [ ! -d "build/iOS" ]; then
+    mkdir -p build/iOS
 fi
-cd tuzzi/build/iOS
+cd build/iOS
 cmake ../../ -G "Xcode" -DTarget=iOS
-cd ../../../
+cd ../../

@@ -11,6 +11,8 @@
 #include "Tuzzi.h"
 #include "gl/gl.h"
 
+NAMESPACE_TUZZI_ENGINE_USING
+
 @interface GLView : UIView
 
 @end
@@ -41,6 +43,7 @@
 @end
 @interface TuzziiOS()
 {
+    Tuzzi *m_tuzzi;
     GLView *m_view;
     EAGLContext *m_context;
     
@@ -93,9 +96,10 @@
         }
         
         
-        tuzzi::Tuzzi::instance()->init();
+        m_tuzzi = new Tuzzi();
+        m_tuzzi->init();
         CGFloat scale = [UIScreen mainScreen].scale;
-        tuzzi::Tuzzi::instance()->setSize(frame.size.width * scale, frame.size.height * scale);
+        m_tuzzi->setSize(frame.size.width * scale, frame.size.height * scale);
     }
     
     return self;
@@ -104,7 +108,7 @@
 - (void)drawFrame {
     glBindFramebuffer(GL_FRAMEBUFFER, m_frame_buffer);
     glBindRenderbuffer(GL_RENDERBUFFER, m_color_buffer);
-    tuzzi::Tuzzi::instance()->update();
+    m_tuzzi->update();
     [m_context presentRenderbuffer:GL_RENDERBUFFER];
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
@@ -116,27 +120,39 @@
 
 - (BOOL)loadApplication:(SharedPtr<tuzzi::Application>)application
 {
-    tuzzi::Tuzzi::instance()->loadApplication(application);
+    m_tuzzi->loadApplication(application);
     return YES;
 }
 
 - (BOOL)unloadApplication
 {
-    return tuzzi::Tuzzi::instance()->unloadApplication();
+    return m_tuzzi->unloadApplication();
 }
 
 - (tuzzi::Application *)currentApplication
 {
-    return tuzzi::Tuzzi::instance()->currentApplication().get();
+    return m_tuzzi->currentApplication().get();
 }
 
 - (void)destroy
 {
+    m_tuzzi->destroy();
+    
     glDeleteRenderbuffers(1, &m_color_buffer);
     glDeleteRenderbuffers(1, &m_depth_buffer);
     glDeleteFramebuffers(1, &m_frame_buffer);
+}
+
+const tuzzi::String& tuzzi::Tuzzi::getResourcePath()
+{
+    static tuzzi::String s_engine_path;
+    if (s_engine_path.empty())
+    {
+        s_engine_path = [[[NSBundle mainBundle] resourcePath] UTF8String];
+        s_engine_path += "/res";
+    }
     
-    tuzzi::Tuzzi::instance()->destroy();
+    return s_engine_path;
 }
 
 - (void)dealloc

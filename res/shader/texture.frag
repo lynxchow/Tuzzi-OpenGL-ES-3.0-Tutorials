@@ -1,9 +1,8 @@
-#version 330 core
+precision mediump float;
 out vec4 FragColor;
 
 in vec2 TexCoord;
 
-// texture sampler
 uniform sampler2D texture1;
 
 void main()

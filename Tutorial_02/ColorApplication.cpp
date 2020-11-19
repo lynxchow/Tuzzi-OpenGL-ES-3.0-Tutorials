@@ -13,7 +13,6 @@
 NAMESPACE_TUZZI_ENGINE_USING
 
 const char *s_vertex_shader =
-    GL_HEADER_VERSION // OpenGL ES 3.0版本信息声明，不写的话shader编译不通过
     R"(
     // 这里写顶点布局，location = 0，要求cpu传递的顶点时，position数据要放在最前面
     layout (location = 0) in vec3 position;
@@ -33,7 +32,6 @@ const char *s_vertex_shader =
 )";
 
 const char *s_fragment_shader =
-    GL_HEADER_VERSION // OpenGL ES 3.0版本信息声明，不写的话shader编译不通过
     R"(
     // 精度声明，不写编译不通过
     precision mediump float;

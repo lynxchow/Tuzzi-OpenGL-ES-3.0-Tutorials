@@ -96,12 +96,19 @@ bool Shader::initWithSource(const char *vertexSource, const char *fragmentSource
     bool result = true;
     
     vertex = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertex, 1, &vertexSource, NULL);
+    
+    std::string preprocessVertexSource = GL_HEADER_VERSION + std::string(vertexSource);
+    const char *preprocessVertexSourcePtr = preprocessVertexSource.c_str();
+    
+    glShaderSource(vertex, 1, &preprocessVertexSourcePtr, NULL);
     glCompileShader(vertex);
     result = checkCompileErrors(vertex, "VERTEX");
     
+    std::string preprocessFragmentSource = GL_HEADER_VERSION + std::string(fragmentSource);
+    const char *preprocessFragmentSourcePtr = preprocessFragmentSource.c_str();
+    
     fragment = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragment, 1, &fragmentSource, NULL);
+    glShaderSource(fragment, 1, &preprocessFragmentSourcePtr, NULL);
     glCompileShader(fragment);
     result = result && checkCompileErrors(fragment, "FRAGMENT");
     

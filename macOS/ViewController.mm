@@ -7,10 +7,10 @@
 //
 
 #import "ViewController.h"
-#import "TuzziMac.h"
-#include "DemoApplication.h"
-#include "ColorApplication.h"
-#include "TextureApplication.h"
+#import "mac/TuzziMac.h"
+#include "Tutorial_01/DemoApplication.h"
+#include "Tutorial_02/ColorApplication.h"
+#include "Tutorial_03/TextureApplication.h"
 
 @interface FrameHandler : NSObject
 {
@@ -70,6 +70,7 @@ NAMESPACE_TUZZI_ENGINE_USING
 
 - (void)dealloc
 {
+    [super dealloc];
     [m_timer invalidate];
     m_timer = nil;
 }

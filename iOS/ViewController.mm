@@ -7,9 +7,10 @@
 //
 
 #import "ViewController.h"
-#include "TuzziiOS.h"
-#include "DemoApplication.h"
-#include "ColorApplication.h"
+#include "ios/TuzziiOS.h"
+#include "Tutorial_01/DemoApplication.h"
+#include "Tutorial_02/ColorApplication.h"
+#include "Tutorial_03/TextureApplication.h"
 
 @interface FrameHandler : NSObject
 {
@@ -58,12 +59,13 @@ NAMESPACE_TUZZI_ENGINE_USING
     [m_display_link setPreferredFramesPerSecond:60];
     [m_display_link addToRunLoop: NSRunLoop.currentRunLoop forMode:NSDefaultRunLoopMode];
     
-    SharedPtr<Application> app = MakeShared<ColorApplication>();
+    SharedPtr<Application> app = MakeShared<TextureApplication>();
     [m_engine loadApplication:app];
 }
 
 - (void)dealloc
 {
+    [super dealloc];
     [m_display_link invalidate];
     m_display_link = nil;
 }
