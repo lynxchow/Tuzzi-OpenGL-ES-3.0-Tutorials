@@ -78,7 +78,7 @@ file(GLOB TUZZI_DEP_SRCS
      ${TUZZI_LIB_SRC_DIR}/3rdparty/zlib/unzip.c
      )
 
-source_group(TREE ${TUZZI_LIB_SRC_DIR}/.. FILES ${TUZZI_DEP_SRCS})
+source_group(TREE ${TUZZI_LIB_SRC_DIR}/3rdparty FILES ${TUZZI_DEP_SRCS})
 
 add_library(TuzziDep STATIC ${TUZZI_DEP_SRCS})
 
