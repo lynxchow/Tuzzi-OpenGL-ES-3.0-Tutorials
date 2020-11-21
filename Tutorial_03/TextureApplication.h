@@ -10,8 +10,8 @@
 #define _TEXTURE_APPLICATION_H_
 
 #include "Application.h"
-#include "Shader.h"
 #include "graphics/Mesh.h"
+#include "graphics/Shader.h"
 #include "graphics/Texture.h"
 
 class TextureApplication : public tuzzi::Application

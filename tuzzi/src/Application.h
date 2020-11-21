@@ -22,36 +22,22 @@ public:
     friend class Tuzzi;
     
     Application();
-    
     virtual ~Application();
-    
     bool isStarted();
-    
     unsigned int getWidth();
-    
     unsigned int getHeight();
-    
     Tuzzi *getTuzzi() const;
     
 private:
     void init(Tuzzi *tuzzi);
-    
     void setSize(int width, int height);
-    
     void update();
-    
     void lateUpdate();
-    
     void destroy();
-    
     virtual void onInit();
-    
     virtual void onResize(int width, int height);
-    
     virtual void onUpdate();
-    
     virtual void onLateUpdate();
-    
     virtual void onDestroy();
     
 private:

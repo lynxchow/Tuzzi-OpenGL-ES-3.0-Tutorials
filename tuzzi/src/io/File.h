@@ -3,7 +3,7 @@
 //  Tuzzi
 //
 //  Created by Lyn on 2020/5/6.
-//  Copyright © 2020 Vin-Ex. All rights reserved.
+//  Copyright © 2019 Vin-Ex. All rights reserved.
 //
 
 #ifndef _TUZZI_IO_FILE_H_

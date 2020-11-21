@@ -90,6 +90,11 @@ const tuzzi::String& tuzzi::Tuzzi::getResourcePath()
     return s_engine_path;
 }
 
+- (void)setInputTexture:(SharedPtr<tuzzi::Texture>)texture
+{
+    m_tuzzi->getTextureManager()->setInputTexture(texture);
+}
+
 - (void)dealloc
 {
     m_tuzzi->destroy();

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
 #include "Application.h"
+#include "graphics/Texture.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)unloadApplication;
 - (tuzzi::Application *)currentApplication;
 - (void)drawFrame;
+- (void)setInputTexture:(SharedPtr<tuzzi::Texture>)texture;
 @end
 
 NS_ASSUME_NONNULL_END

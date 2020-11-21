@@ -10,11 +10,6 @@
 
 NAMESPACE_TUZZI_ENGINE_BEGIN
 
-Vector3f::Vector3f() : x(0.0), y(0.0), z(0.0)
-{
-    
-}
-
 Vector3f::Vector3f(float x, float y, float z) : x(x), y(y), z(z)
 {
     

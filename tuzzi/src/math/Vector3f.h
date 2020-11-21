@@ -16,9 +16,7 @@ NAMESPACE_TUZZI_ENGINE_BEGIN
 struct Vector3f
 {
 public:
-    Vector3f();
-    
-    Vector3f(float x, float y, float z);
+    Vector3f(float x = 0.0f, float y = 0.0f, float z = 0.0f);
     
     float& operator [](int index) const;
     

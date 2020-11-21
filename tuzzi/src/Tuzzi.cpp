@@ -56,6 +56,7 @@ void Tuzzi::init()
 {
     m_resource_manager.init();
     m_resource_manager.setRootDir(getResourcePath());
+    m_texture_manager.init();
     
     if (m_application)
     {
@@ -67,6 +68,11 @@ void Tuzzi::init()
 ResourceManager *Tuzzi::getResourceManager()
 {
     return &m_resource_manager;
+}
+
+TextureManager *Tuzzi::getTextureManager()
+{
+    return &m_texture_manager;
 }
 
 void Tuzzi::setSize(int width, int height)
@@ -94,6 +100,7 @@ void Tuzzi::destroy()
         m_application->destroy();
         m_application = nullptr;
     }
+    m_texture_manager.destroy();
     m_resource_manager.destroy();
 }
 

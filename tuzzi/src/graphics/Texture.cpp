@@ -3,7 +3,7 @@
 //  Tuzzi
 //
 //  Created by Lyn on 2020/5/25.
-//  Copyright © 2020 Vin-Ex. All rights reserved.
+//  Copyright © 2019 Vin-Ex. All rights reserved.
 //
 
 #include "graphics/Texture.h"
@@ -106,6 +106,61 @@ SharedPtr<Texture> Texture::createTexture2DFromMemory(
     }
     
     return texture;
+}
+
+SharedPtr<Texture> Texture::createTextureFromHandle(int width,
+                                                    int height,
+                                                    TextureHandle handle,
+                                                    TextureFormat format,
+                                                    FilterMode filter_mode,
+                                                    WrapMode wrap_mode,
+                                                    bool mipmap)
+{
+    SharedPtr<Texture> texture = SharedPtr<Texture>(new Texture());
+    texture->m_width = width;
+    texture->m_height = height;
+    texture->m_array_size = 1;
+    texture->m_format = format;
+    texture->m_filter_mode = filter_mode;
+    texture->m_wrap_mode = wrap_mode;
+    texture->m_handle = handle;
+    
+    glBindTexture(GL_TEXTURE_2D, *static_cast<GLuint *>(texture->m_handle));
+    
+    switch (filter_mode)
+    {
+        case FilterMode::Nearest:
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+            break;
+        case FilterMode::Linear:
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            break;
+        default:
+            break;
+    }
+    
+    switch (wrap_mode)
+    {
+        case WrapMode::Repeat:
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+            break;
+        case WrapMode::ClampToEdge:
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+            break;
+        case WrapMode::Mirror:
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+            break;
+        default:
+            break;
+    }
+
+    return texture;
+    
 }
 
 SharedPtr<Texture> Texture::createTexture2D(

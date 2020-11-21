@@ -3,7 +3,7 @@
 //  Tuzzi
 //
 //  Created by Lyn on 2020/5/25.
-//  Copyright © 2020 Vin-Ex. All rights reserved.
+//  Copyright © 2019 Vin-Ex. All rights reserved.
 //
 
 #ifndef _TUZZI_GRAPHICS_TEXTURE_H_
@@ -61,6 +61,14 @@ public:
                                               FilterMode filter_mode,
                                               WrapMode wrap_mode,
                                               bool mipmap);
+    
+    static SharedPtr<Texture> createTextureFromHandle(int width,
+                                                      int height,
+                                                      TextureHandle handle,
+                                                      TextureFormat format,
+                                                      FilterMode filter_mode,
+                                                      WrapMode wrap_mode,
+                                                      bool mipmap);
     
     virtual ~Texture();
     

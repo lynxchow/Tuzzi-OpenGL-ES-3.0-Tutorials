@@ -3,7 +3,7 @@
 //  Tuzzi
 //
 //  Created by Lyn on 2020/5/6.
-//  Copyright © 2020 Vin-Ex. All rights reserved.
+//  Copyright © 2019 Vin-Ex. All rights reserved.
 //
 
 #ifndef _TUZZI_MEMORY_BYTE_BUFFER_H_

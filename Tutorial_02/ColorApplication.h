@@ -10,7 +10,7 @@
 #define _COLOR_APPLICATION_H_
 
 #include "Application.h"
-#include "Shader.h"
+#include "graphics/Shader.h"
 
 class ColorApplication : public tuzzi::Application
 {
@@ -20,7 +20,6 @@ public:
     
 private:
     unsigned int VBO, VAO, EBO;
-//    int shaderProgram;
     tuzzi::Shader *m_shader;
     virtual void onInit() override;
     virtual void onUpdate() override;
