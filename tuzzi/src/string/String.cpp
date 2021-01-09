@@ -7,6 +7,7 @@
 //
 
 #include "string/String.h"
+#include "container/Vector.h"
 #include <stdarg.h>
 
 NAMESPACE_TUZZI_ENGINE_BEGIN
@@ -193,6 +194,40 @@ String String::substring(int start, int count) const
     String result;
     result.m_string = m_string.substr(start, count);
     return result;
+}
+
+String String::toLower() const
+{
+    Vector<char> str;
+
+    for (auto c : m_string)
+    {
+        if (c >= 'A' && c <= 'Z')
+        {
+            c -= 'A' - 'a';
+        }
+        str.push_back(c);
+    }
+    str.push_back(0);
+
+    return String(&str[0]);
+}
+
+String String::toUpper() const
+{
+    Vector<char> str;
+
+    for (auto c : m_string)
+    {
+        if (c >= 'a' && c <= 'z')
+        {
+            c += 'A' - 'a';
+        }
+        str.push_back(c);
+    }
+    str.push_back(0);
+
+    return String(&str[0]);
 }
 
 NAMESPACE_TUZZI_ENGINE_END

@@ -36,6 +36,8 @@ public:
     bool endsWith(const String& str) const;
     String substring(int start, int count = -1) const;
     bool contains(const String& str) const;
+    String toLower() const;
+    String toUpper() const;
 
     bool operator ==(const String& right) const;
     bool operator !=(const String& right) const;
@@ -81,5 +83,16 @@ String String::toString(const V& v)
 }
 
 NAMESPACE_TUZZI_ENGINE_END
+
+namespace std
+{
+    template<> struct hash<tuzzi::String>
+    {
+        std::size_t operator()(tuzzi::String const& s) const noexcept
+        {
+            return std::hash<std::string>{}(s.str());
+        }
+    };
+}
 
 #endif /* String_h */

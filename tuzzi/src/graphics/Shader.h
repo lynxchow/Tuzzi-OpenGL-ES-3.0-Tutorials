@@ -30,6 +30,8 @@ public:
     
     void use();
     
+    ShaderHandle getHandle() const { return m_handle; }
+    
 private:
     ShaderHandle m_handle;
 };
