@@ -106,9 +106,6 @@ private:
         }
     }
     
-    void updateUniformMember(const String& name, const void* data, int size);
-    void updateUniformTexture(const String& name, const SharedPtr<Texture>& texture);
-    
     Map<String, MaterialProperty> m_properties;
     SharedPtr<Shader> m_shader;
 };

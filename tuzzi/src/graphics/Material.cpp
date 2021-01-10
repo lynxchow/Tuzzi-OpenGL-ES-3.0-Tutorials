@@ -93,17 +93,45 @@ void Material::setTexture(const String& name, const SharedPtr<Texture>& texture)
 
 void Material::prepare()
 {
+    m_shader->use();
     
+    int texture_index = 0;
     
-}
-
-void Material::updateUniformMember(const String& name, const void* data, int size)
-{
-    
-}
-
-void Material::updateUniformTexture(const String& name, const SharedPtr<Texture>& texture)
-{
+    for (auto& prop : m_properties)
+    {
+        if (prop.second.dirty)
+        {
+            GLuint shader = *static_cast<GLuint *>(m_shader->getHandle());
+            GLuint location = glGetUniformLocation(shader, prop.first.str());
+            switch (prop.second.type)
+            {
+                case MaterialProperty::Type::Int:
+                    glUniform1i(location, prop.second.data.int_value);
+                    break;
+                case MaterialProperty::Type::Float:
+                    glUniform1f(location, prop.second.data.float_value);
+                    break;
+                case MaterialProperty::Type::Vector:
+                    glUniform4fv(location, 1, prop.second.data.vector);
+                    break;
+                case MaterialProperty::Type::Color:
+                    glUniform4fv(location, 1, prop.second.data.color);
+                    break;
+                case MaterialProperty::Type::Matrix:
+                    glUniformMatrix4fv(location, 1, true, prop.second.data.matrix);
+                    break;
+                case MaterialProperty::Type::Texture:
+                    glActiveTexture(GL_TEXTURE0 + texture_index);
+                    glBindTexture(GL_TEXTURE_2D, *static_cast<GLuint *>(prop.second.texture->getHandle()));
+                    glUniform1i(location, texture_index);
+                    texture_index++;
+                    break;
+                default:
+                    break;
+            }
+            prop.second.dirty = false;
+        }
+    }
     
 }
 
