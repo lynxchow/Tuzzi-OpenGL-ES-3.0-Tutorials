@@ -11,10 +11,12 @@
 
 #include "Application.h"
 #include "graphics/Mesh.h"
-#include "graphics/Shader.h"
 #include "graphics/Texture.h"
+#include "graphics/Material.h"
 
-class TextureApplication : public tuzzi::Application
+NAMESPACE_TUZZI_ENGINE_USING
+
+class TextureApplication : public Application
 {
 public:
     TextureApplication();
@@ -23,14 +25,20 @@ public:
     
 private:
     virtual void onInit() override;
-    
     virtual void onUpdate() override;
-    
     virtual void onDestroy() override;
+    void drawCard(const Vector3f& position, const Vector3f& rotation, float speed, SharedPtr<Texture> texture);
     
-    SharedPtr<tuzzi::Texture> m_texture;
-    SharedPtr<tuzzi::Mesh> m_mesh;
-    SharedPtr<tuzzi::Shader> m_shader;
+    SharedPtr<Texture> m_texture_dark_magican;
+    SharedPtr<Texture> m_texture_dark_magican_girl;
+    SharedPtr<Texture> m_texture_buster_blader;
+    SharedPtr<Texture> m_texture_exodia;
+    SharedPtr<Texture> m_texture_black_luster_soldier;
+    SharedPtr<Texture> m_texture_kuriboh;
+    SharedPtr<Texture> m_texture_back_card;
+    
+    SharedPtr<Mesh> m_mesh;
+    SharedPtr<Material> m_material;
 };
 
 #endif /* TextureApplication_h */
