@@ -76,6 +76,7 @@ file(GLOB TUZZI_DEP_SRCS
      ${TUZZI_LIB_SRC_DIR}/3rdparty/png/pngwutil.c
      ${TUZZI_LIB_SRC_DIR}/3rdparty/zlib/ioapi.c
      ${TUZZI_LIB_SRC_DIR}/3rdparty/zlib/unzip.c
+     ${TUZZI_LIB_SRC_DIR}/3rdparty/cJSON/cJSON.c
      )
 
 source_group(TREE ${TUZZI_LIB_SRC_DIR}/3rdparty FILES ${TUZZI_DEP_SRCS})
